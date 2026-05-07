@@ -1,34 +1,49 @@
-Business Performance Notes
+Business Performance Analysis Notes
 
+Revenue Performance Analysis
 
+Objective
 
-Revenue Analysis
+The goal of this analysis was to understand overall business revenue performance using transaction-level payment data.
 
+---
 
+KPIs Analyzed
 
-KPI 1 : Total Revenue
+1. Total Company Revenue
 
+Calculated total revenue generated from all customer payments using the payments table.
 
+2. Monthly Revenue Trend
 
-Calculated total company transaction revenue using payment\_value from payments table.
+Analyzed how company revenue changed over time using order purchase timestamps and payment values.
 
+3. Product Category Revenue
 
+Identified product categories generating the highest revenue using product and order item data.
 
-KPI 2 : Monthly Revenue Trend
+4. State-wise Revenue Analysis
 
+Analyzed which customer states contributed the highest revenue to the business.
 
+5. Top Customer Revenue Analysis
 
-Analyzed monthly revenue trend using order purchase timestamp and payment values.
+Identified high-value customers based on total lifetime transaction revenue.
 
+---
 
+Business Understanding
 
-Key Learning:
+- Revenue analysis requires combining transaction data with business dimensions such as time, geography, products, and customers.
+- Different revenue perspectives require different tables and aggregation logic.
+- payments table represents transaction-level business revenue.
+- order_items table helps analyze product-level revenue contribution.
+- customers table enables regional business analysis.
 
+---
 
+Key Learning
 
-\- Revenue analysis requires combining KPI source with time dimension.
-
-\- payments table stores transaction value.
-
-\- orders table stores business timeline.
-
+- Learned how to perform KPI-based business analysis using SQL.
+- Improved understanding of joins, aggregation, grouping, and time-based analysis.
+- Understood the importance of selecting the correct revenue source based on business context.
