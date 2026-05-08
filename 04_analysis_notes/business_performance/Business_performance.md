@@ -1,4 +1,4 @@
-Business Performance Analysis Notes
+#Business Performance Analysis Notes
 
 Revenue Performance Analysis
 
@@ -47,3 +47,48 @@ Key Learning
 - Learned how to perform KPI-based business analysis using SQL.
 - Improved understanding of joins, aggregation, grouping, and time-based analysis.
 - Understood the importance of selecting the correct revenue source based on business context.
+
+## Order Performance Analysis
+
+KPIs Analyzed
+
+1. Total Orders
+
+Calculated the total number of unique orders placed across the platform.
+
+2. Total Product Orders
+
+Analyzed the total number of products purchased through order items.
+
+3. Monthly Order Trend
+
+Evaluated how customer order activity changed over time using purchase timestamps.
+
+4. Average Orders Per Customer
+
+Calculated the average number of orders placed by each customer using nested aggregation.
+
+5. Order Status Distribution
+
+Analyzed operational order statuses such as delivered, canceled, shipped, and unavailable orders.
+
+6. Average Order Value (AOV)
+
+Calculated the average revenue generated per order transaction.
+
+---
+
+Business Understanding
+
+- Order analysis helps measure business activity and operational performance.
+- Monthly order trends help identify platform growth and customer purchasing patterns.
+- Order status distribution reflects fulfillment efficiency and operational health.
+- Average Order Value (AOV) helps evaluate customer basket size and transaction quality.
+
+---
+
+Key Learning
+
+- Learned order-level vs item-level analysis.
+- Improved understanding of nested aggregation using subqueries.
+- Practiced KPI-based operational analysis using SQL.
