@@ -1,4 +1,4 @@
-#Business Performance Analysis Notes
+# Business Performance Analysis Notes
 
 Revenue Performance Analysis
 
@@ -92,3 +92,62 @@ Key Learning
 - Learned order-level vs item-level analysis.
 - Improved understanding of nested aggregation using subqueries.
 - Practiced KPI-based operational analysis using SQL.
+
+### Customer Performance Analysis
+
+KPIs Analyzed
+
+1. Repeat Customer Rate
+
+Calculated the percentage of customers who placed more than one order.
+
+2. High-Value Customers
+
+Identified customers generating the highest lifetime revenue for the business.
+
+3. Most Active Customers
+
+Analyzed customers with the highest order frequency.
+
+4. Monthly New Customer Acquisition
+
+Measured how many new customers joined the platform month by month using first purchase dates.
+
+5. Customer Average Order Value (AOV)
+
+Calculated average revenue generated per order at customer level.
+
+6. State-wise Customer Distribution
+
+Analyzed customer concentration across different states.
+
+7. Low-Engagement Customers
+
+Identified customers who placed only one order.
+
+8. Top Customer Revenue Contribution
+
+Measured how much company revenue is contributed by top customers.
+
+9. Customer Segmentation
+
+Segmented customers into low, medium, and high frequency buyers based on purchase behavior.
+
+---
+
+Business Understanding
+
+- Customer analysis helps evaluate customer loyalty, engagement, and purchasing behavior.
+- Repeat customer metrics help measure retention strength.
+- High-value customer analysis identifies important revenue-generating customers.
+- Customer segmentation helps businesses design targeted marketing strategies.
+- Customer acquisition trends help evaluate platform growth over time.
+
+---
+
+Key Learning
+
+- Improved understanding of customer-level aggregation and behavioral analysis.
+- Practiced nested aggregation and conditional aggregation using SQL.
+- Learned segmentation analysis using CASE WHEN conditions.
+- Developed KPI-based customer analytics thinking using SQL.
