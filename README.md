@@ -25,7 +25,7 @@ End-to-end SQL-based business intelligence project analyzing **100,000+ orders**
 - **Streamlit** — Interactive web dashboard
 - **Plotly** — Data visualization
 
-## Projects
+## 📂 Project Structure
 01_dataset/00_raw_data/
 02_schema_design/
 03_sql_queries/
@@ -81,5 +81,5 @@ End-to-end SQL-based business intelligence project analyzing **100,000+ orders**
 | Window Functions | Ranking and row numbering |
 
 
-└── README.md                     # This file
-## 📂 Project Structure
+
+
