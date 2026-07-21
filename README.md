@@ -25,27 +25,12 @@ End-to-end SQL-based business intelligence project analyzing **100,000+ orders**
 - **Streamlit** — Interactive web dashboard
 - **Plotly** — Data visualization
 
-
-olist-business-analysis-suite/
-├── 01_dataset/
-│   └── 00_raw_data/              
-├── 02_schema_design/             
-│   └── schema_notes.md
-├── 03_sql_queries/               
-│   ├── business_performance/
-│   │   ├── 01_revenue_analysis.sql
-│   │   ├── 02_order_performance.sql
-│   │   └── 03_customer_performance.sql
-│   ├── sales_dashboard/
-│   ├── delivery_logistics/
-│   ├── customer_segmentation/
-│   └── customer_satisfaction/
-├── 04_analysis_notes/            
-│   └── business_performance.md
-├── 05_dashboards/
-│   └── customer_dashboard/
-│       └── dashboard.py          
-├── requirements.txt              
+## Projects
+01_dataset/00_raw_data/
+02_schema_design/
+03_sql_queries/
+04_analysis_notes/
+05_dashboards/customer_dashboard/          
 
 
 ---
