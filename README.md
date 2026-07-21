@@ -28,10 +28,10 @@ End-to-end SQL-based business intelligence project analyzing **100,000+ orders**
 
 olist-business-analysis-suite/
 ├── 01_dataset/
-│   └── 00_raw_data/              # Raw CSV files (9 datasets)
-├── 02_schema_design/             # Database schema documentation
+│   └── 00_raw_data/              
+├── 02_schema_design/             
 │   └── schema_notes.md
-├── 03_sql_queries/               # Business analysis queries
+├── 03_sql_queries/               
 │   ├── business_performance/
 │   │   ├── 01_revenue_analysis.sql
 │   │   ├── 02_order_performance.sql
@@ -40,12 +40,12 @@ olist-business-analysis-suite/
 │   ├── delivery_logistics/
 │   ├── customer_segmentation/
 │   └── customer_satisfaction/
-├── 04_analysis_notes/            # Business insights
+├── 04_analysis_notes/            
 │   └── business_performance.md
 ├── 05_dashboards/
 │   └── customer_dashboard/
-│       └── dashboard.py           # Streamlit app (LIVE)
-├── requirements.txt              # Python dependencies
+│       └── dashboard.py          
+├── requirements.txt              
 
 
 ---
