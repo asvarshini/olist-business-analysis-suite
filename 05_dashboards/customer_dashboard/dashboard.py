@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
 
 # Page config
 st.set_page_config(
@@ -13,14 +14,19 @@ st.set_page_config(
 st.title("📊 Olist E-Commerce Analytics")
 st.markdown("Brazilian E-Commerce Business Intelligence | 100K+ Orders Analyzed")
 
-# Load data - FIXED PATHS
+# Load data - SMART PATH (works both local and cloud)
 @st.cache_data
 def load_data():
-    orders = pd.read_csv('../../01_dataset/00_raw_data/olist_orders_dataset.csv')
-    order_items = pd.read_csv('../../01_dataset/00_raw_data/olist_order_items_dataset.csv')
-    payments = pd.read_csv('../../01_dataset/00_raw_data/olist_order_payments_dataset.csv')
-    customers = pd.read_csv('../../01_dataset/00_raw_data/olist_customers_dataset.csv')
-    products = pd.read_csv('../../01_dataset/00_raw_data/olist_products_dataset.csv')
+    def get_data_path(filename):
+        local_path = f'../../01_dataset/00_raw_data/{filename}'
+        cloud_path = f'01_dataset/00_raw_data/{filename}'
+        return local_path if os.path.exists(local_path) else cloud_path
+    
+    orders = pd.read_csv(get_data_path('olist_orders_dataset.csv'))
+    order_items = pd.read_csv(get_data_path('olist_order_items_dataset.csv'))
+    payments = pd.read_csv(get_data_path('olist_order_payments_dataset.csv'))
+    customers = pd.read_csv(get_data_path('olist_customers_dataset.csv'))
+    products = pd.read_csv(get_data_path('olist_products_dataset.csv'))
     
     # Convert dates
     orders['order_purchase_timestamp'] = pd.to_datetime(orders['order_purchase_timestamp'])
@@ -135,23 +141,18 @@ if data_loaded:
         col1, col2 = st.columns(2)
         
         with col1:
-            # FIX: Merge with customers to get customer_unique_id, then group
             orders_with_unique = filtered_orders.merge(
                 customers[['customer_id', 'customer_unique_id']], 
                 on='customer_id', 
                 how='left'
             )
-            # Group by customer_unique_id to count actual customers
             cust_orders = orders_with_unique.groupby('customer_unique_id')['order_id'].nunique().reset_index()
             cust_orders.columns = ['customer_unique_id', 'order_count']
             
             def segment(count):
-                if count == 1: 
-                    return 'Low Frequency'
-                elif count <= 5: 
-                    return 'Medium Frequency'
-                else: 
-                    return 'High Frequency'
+                if count == 1: return 'Low Frequency'
+                elif count <= 5: return 'Medium Frequency'
+                else: return 'High Frequency'
             
             cust_orders['segment'] = cust_orders['order_count'].apply(segment)
             seg_counts = cust_orders['segment'].value_counts().reset_index()
