@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import os
 
 # Page config
@@ -75,7 +77,7 @@ if data_loaded:
     orders_with_items = filtered_orders.merge(order_items, on='order_id', how='left')
     orders_full = filtered_orders.merge(customers, on='customer_id', how='left')
     
-    # KPI Cards
+    # ==================== KPI CARDS ====================
     col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
@@ -98,11 +100,13 @@ if data_loaded:
         total_products = orders_with_items['product_id'].nunique()
         st.metric("🏷️ Products", f"{total_products:,}")
     
-    # Tabs
-    tab1, tab2, tab3 = st.tabs(["📈 Revenue", "📦 Orders", "👥 Customers"])
+    # ==================== TABS ====================
+    tab1, tab2, tab3, tab4 = st.tabs(["📈 Revenue", "📦 Orders", "👥 Customers", "🤖 Recommendations"])
     
-    # Tab 1: Revenue
+    # ==================== TAB 1: REVENUE ====================
     with tab1:
+        st.header("Revenue Performance")
+        
         col1, col2 = st.columns(2)
         
         with col1:
@@ -119,8 +123,10 @@ if data_loaded:
                         orientation='h', title='Top 10 Categories by Revenue')
             st.plotly_chart(fig, use_container_width=True)
     
-    # Tab 2: Orders
+    # ==================== TAB 2: ORDERS ====================
     with tab2:
+        st.header("Order Performance")
+        
         col1, col2 = st.columns(2)
         
         with col1:
@@ -136,8 +142,10 @@ if data_loaded:
                         title='Order Status Distribution', hole=0.4)
             st.plotly_chart(fig, use_container_width=True)
     
-    # Tab 3: Customers - FIXED SEGMENTATION
+    # ==================== TAB 3: CUSTOMERS ====================
     with tab3:
+        st.header("Customer Insights")
+        
         col1, col2 = st.columns(2)
         
         with col1:
@@ -174,6 +182,170 @@ if data_loaded:
             fig = px.bar(state_cust, x='customer_state', y='customer_unique_id',
                         title='Top 10 States by Customers')
             st.plotly_chart(fig, use_container_width=True)
+    
+    # ==================== TAB 4: RECOMMENDATIONS (NEW!) ====================
+    with tab4:
+        st.header("🤖 AI Product Recommendations")
+        st.markdown("**Co-purchase analysis** — discover what products are frequently bought together")
+        
+        # Prepare data for recommendation analysis
+        # Get all order-items with product info
+        items_with_products = order_items.merge(products[['product_id', 'product_category_name']], 
+                                                 on='product_id', how='left')
+        
+        # Get category names for better display
+        category_mapping = products[['product_id', 'product_category_name']].drop_duplicates()
+        
+        # --- Section 1: Top Product Associations ---
+        st.subheader("🔗 Frequently Bought Together")
+        
+        # Find products bought in same order
+        order_products = order_items.merge(
+            products[['product_id', 'product_category_name']], 
+            on='product_id', 
+            how='left'
+        )[['order_id', 'product_id', 'product_category_name']]
+        
+        # Get top product pairs
+        @st.cache_data
+        def get_product_pairs():
+            # Create pairs of products in same order
+            pairs = []
+            for order_id, group in order_products.groupby('order_id'):
+                products_in_order = group['product_category_name'].unique()
+                if len(products_in_order) > 1:
+                    for i, cat1 in enumerate(products_in_order):
+                        for cat2 in products_in_order[i+1:]:
+                            if cat1 != cat2:
+                                pairs.append((cat1, cat2))
+            
+            pairs_df = pd.DataFrame(pairs, columns=['category_1', 'category_2'])
+            pair_counts = pairs_df.groupby(['category_1', 'category_2']).size().reset_index(name='frequency')
+            pair_counts = pair_counts.sort_values('frequency', ascending=False).head(15)
+            return pair_counts
+        
+        pair_counts = get_product_pairs()
+        
+        if not pair_counts.empty:
+            # Create network-style visualization
+            fig = px.bar(
+                pair_counts.head(10),
+                x='frequency',
+                y=pair_counts.head(10).apply(lambda x: f"{x['category_1']} + {x['category_2']}", axis=1),
+                orientation='h',
+                title='Top 10 Category Combinations (Bought Together)',
+                labels={'frequency': 'Times Bought Together', 'y': 'Category Pair'},
+                color='frequency',
+                color_continuous_scale='Viridis'
+            )
+            fig.update_layout(height=500)
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("Not enough multi-item orders in selected date range for association analysis.")
+        
+        # --- Section 2: Cross-Category Insights ---
+        st.subheader("🎯 Cross-Category Buying Patterns")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # Products per order distribution
+            items_per_order = order_items.groupby('order_id')['order_item_id'].count().reset_index()
+            items_per_order.columns = ['order_id', 'items_count']
+            
+            items_dist = items_per_order['items_count'].value_counts().head(10).reset_index()
+            items_dist.columns = ['items_in_order', 'order_count']
+            
+            fig = px.bar(
+                items_dist,
+                x='items_in_order',
+                y='order_count',
+                title='Items per Order Distribution',
+                labels={'items_in_order': 'Items in Order', 'order_count': 'Number of Orders'},
+                color='order_count',
+                color_continuous_scale='Plasma'
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with col2:
+            # Top categories by cross-sell potential
+            cross_sell = order_items.merge(
+                products[['product_id', 'product_category_name']], 
+                on='product_id', 
+                how='left'
+            )
+            
+            # Count how many orders each category appears in
+            category_orders = cross_sell.groupby('product_category_name')['order_id'].nunique().reset_index()
+            category_orders.columns = ['category', 'order_count']
+            category_orders = category_orders.sort_values('order_count', ascending=False).head(10)
+            
+            fig = px.bar(
+                category_orders,
+                x='order_count',
+                y='category',
+                orientation='h',
+                title='Categories with Highest Order Presence',
+                labels={'order_count': 'Orders Containing Category', 'category': 'Product Category'},
+                color='order_count',
+                color_continuous_scale='Cividis'
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        
+        # --- Section 3: Recommendation Engine Demo ---
+        st.subheader("💡 Smart Recommendations")
+        
+        # Get top categories for dropdown
+        top_categories = products['product_category_name'].value_counts().head(20).index.tolist()
+        
+        selected_category = st.selectbox(
+            "Select a product category to see recommendations:",
+            options=top_categories,
+            index=0
+        )
+        
+        if selected_category:
+            # Find categories frequently bought with selected category
+            related_pairs = pair_counts[
+                (pair_counts['category_1'] == selected_category) | 
+                (pair_counts['category_2'] == selected_category)
+            ].head(5)
+            
+            if not related_pairs.empty:
+                st.markdown(f"**Customers who bought `{selected_category}` also bought:**")
+                
+                for _, row in related_pairs.iterrows():
+                    rec_category = row['category_2'] if row['category_1'] == selected_category else row['category_1']
+                    confidence = min(100, int((row['frequency'] / pair_counts['frequency'].max()) * 100))
+                    
+                    st.markdown(f"""
+                    <div style="
+                        background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(6,182,212,0.1));
+                        border-left: 4px solid #6366f1;
+                        padding: 1rem 1.5rem;
+                        border-radius: 0 12px 12px 0;
+                        margin-bottom: 0.8rem;
+                    ">
+                        <strong style="color: #6366f1; font-size: 1.1rem;">{rec_category}</strong>
+                        <div style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.3rem;">
+                            Confidence: {confidence}% | Co-purchased {row['frequency']} times
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+            else:
+                st.info(f"Not enough data for `{selected_category}` in current filter range.")
+        
+        # --- Section 4: Business Insight ---
+        st.markdown("---")
+        st.markdown("""
+        <div style="background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 16px; padding: 1.5rem;">
+            <h4 style="color: #f59e0b; margin-bottom: 0.5rem;">📊 Business Insight</h4>
+            <p style="color: #cbd5e1; margin: 0;">
+                Cross-category recommendations can increase average order value by <strong>15-25%</strong>. 
+                Use these insights for bundle pricing, email marketing, and homepage personalization.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
     
     # Footer
     st.markdown("---")
