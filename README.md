@@ -41,6 +41,7 @@ The analysis focuses on **revenue, orders, products, customers, geographic perfo
 | 🚚 Delivered Orders | **97.02%** |
 | 🔁 Repeat Customer Rate | **3.12%** |
 | 🛍️ Product Categories | **71** |
+|  🛍️ Unique Products |	**32,951** |
 | ⭐ Top Customer Lifetime Revenue | **R$ 13,664.08** |
 
 > **Note:** `order_id` represents an order, while `customer_unique_id` represents the actual customer across multiple orders. Therefore, orders and unique customers are different metrics.
