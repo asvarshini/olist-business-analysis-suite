@@ -31,19 +31,17 @@ GROUP BY monthly_purchase
 ORDER BY monthly_purchase;
 
 -- =====================================================
--- KPI 4 : AVERAGE ORDERS PER CUSTOMER
+-- KPI 4 : AVERAGE ORDER VALUE (AOV)
 -- =====================================================
 
 SELECT
-AVG(t.total_orders) AS avg_orders_per_customer
+    ROUND(AVG(order_payment), 2) AS average_order_value
 FROM (
-SELECT
-c.customer_unique_id,
-COUNT(o.order_id) AS total_orders
-FROM customers c
-JOIN orders o
-ON c.customer_id = o.customer_id
-GROUP BY c.customer_unique_id
+    SELECT
+        order_id,
+        SUM(payment_value) AS order_payment
+    FROM payments
+    GROUP BY order_id
 ) t;
 
 -- =====================================================
