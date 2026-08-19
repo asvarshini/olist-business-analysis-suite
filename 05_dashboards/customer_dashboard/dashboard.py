@@ -94,14 +94,14 @@ if data_loaded:
     
     with col4:
         with col4:
-    filtered_customer_ids = filtered_orders['customer_id'].dropna()
-
-    total_customers = customers[
-        customers['customer_id'].isin(filtered_customer_ids)
-    ]['customer_unique_id'].nunique()
-
-    st.metric("👥 Customers", f"{total_customers:,}")
-    
+            filtered_customer_ids = filtered_orders['customer_id'].dropna()
+        
+            total_customers = customers[
+                customers['customer_id'].isin(filtered_customer_ids)
+            ]['customer_unique_id'].nunique()
+        
+            st.metric("👥 Customers", f"{total_customers:,}")
+            
     with col5:
         total_products = orders_with_items['product_id'].nunique()
         st.metric("🏷️ Products", f"{total_products:,}")
