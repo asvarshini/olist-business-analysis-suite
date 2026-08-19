@@ -16,7 +16,7 @@ st.set_page_config(
 )
 
 # ============================================================
-# CUSTOM CSS — Multi-theme Professional Dashboard
+# CUSTOM CSS — FIXED GAPS & CLEAN LAYOUT
 # ============================================================
 
 st.markdown("""
@@ -31,10 +31,16 @@ st.markdown("""
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
     }
 
+    /* FIXED: Reduced top gap */
     .block-container {
-        padding-top: 1rem;
-        padding-bottom: 3rem;
+        padding-top: 0.5rem !important;
+        padding-bottom: 2rem;
         max-width: 1400px;
+    }
+
+    /* Remove default streamlit padding */
+    .st-emotion-cache-1jicfl2 {
+        padding-top: 0rem;
     }
 
     h1, h2, h3, h4 {
@@ -44,11 +50,11 @@ st.markdown("""
 
     /* ---------- HERO SECTION ---------- */
     .hero-container {
-        background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
-        border: 1px solid rgba(148, 163, 184, 0.2);
-        border-radius: 24px;
-        padding: 2.5rem;
-        margin-bottom: 2rem;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(99, 102, 241, 0.12) 100%);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        border-radius: 20px;
+        padding: 1.8rem 2rem;
+        margin-bottom: 1.2rem;
         position: relative;
         overflow: hidden;
     }
@@ -57,150 +63,151 @@ st.markdown("""
         position: absolute;
         top: -50%;
         right: -10%;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
         pointer-events: none;
     }
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: 800;
         color: #f8fafc;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.4rem;
         position: relative;
         z-index: 1;
     }
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
         color: #94a3b8;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.2rem;
         position: relative;
         z-index: 1;
     }
     .hero-badge {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.12);
+        gap: 0.4rem;
+        padding: 0.4rem 0.9rem;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
         border-radius: 100px;
         color: #e2e8f0;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         font-weight: 600;
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-        backdrop-filter: blur(10px);
+        margin-right: 0.4rem;
+        margin-bottom: 0.4rem;
     }
 
     /* ---------- KPI CARDS ---------- */
     .kpi-grid {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 1rem;
-        margin-bottom: 2rem;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
     }
     .kpi-card {
         background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-        border: 1px solid rgba(148, 163, 184, 0.15);
-        border-radius: 20px;
-        padding: 1.5rem;
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 16px;
+        padding: 1.2rem;
         position: relative;
         overflow: hidden;
         transition: transform 0.2s;
+        text-align: center;
     }
     .kpi-card:hover {
         transform: translateY(-2px);
-        border-color: rgba(148, 163, 184, 0.3);
+        border-color: rgba(148, 163, 184, 0.25);
     }
     .kpi-icon {
-        font-size: 1.5rem;
-        margin-bottom: 0.75rem;
-    }
-    .kpi-label {
-        font-size: 0.8rem;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: 600;
+        font-size: 1.4rem;
         margin-bottom: 0.5rem;
     }
+    .kpi-label {
+        font-size: 0.7rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+    }
     .kpi-value {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         font-weight: 800;
         color: #f8fafc;
-        line-height: 1;
+        line-height: 1.1;
     }
     .kpi-desc {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         color: #64748b;
-        margin-top: 0.5rem;
+        margin-top: 0.4rem;
     }
     .kpi-accent-1 { border-top: 3px solid #10b981; }
     .kpi-accent-2 { border-top: 3px solid #3b82f6; }
     .kpi-accent-3 { border-top: 3px solid #f59e0b; }
     .kpi-accent-4 { border-top: 3px solid #8b5cf6; }
     .kpi-accent-5 { border-top: 3px solid #ec4899; }
+    .kpi-accent-6 { border-top: 3px solid #06b6d4; }
 
     /* ---------- SECTION HEADERS ---------- */
     .section-header {
-        margin: 2rem 0 1.5rem 0;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+        margin: 1.5rem 0 1rem 0;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.12);
     }
     .section-header-title {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: #f8fafc;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.2rem;
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.6rem;
     }
     .section-header-sub {
         color: #94a3b8;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
-    /* ---------- TAB CUSTOMIZATION ---------- */
+    /* ---------- TABS ---------- */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
+        gap: 6px;
         background: rgba(15, 23, 42, 0.6);
-        padding: 0.5rem;
-        border-radius: 16px;
-        border: 1px solid rgba(148, 163, 184, 0.15);
+        padding: 0.4rem;
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        margin-bottom: 0.5rem;
     }
     .stTabs [data-baseweb="tab"] {
-        height: 48px;
-        border-radius: 12px !important;
-        padding: 0 1.5rem;
+        height: 42px;
+        border-radius: 10px !important;
+        padding: 0 1.2rem;
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: #94a3b8;
         border: none !important;
         background: transparent;
     }
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(56,189,248,0.2)) !important;
+        background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(56,189,248,0.15)) !important;
         color: #f8fafc !important;
-        border: 1px solid rgba(129,140,248,0.3) !important;
+        border: 1px solid rgba(129,140,248,0.25) !important;
     }
 
     /* ---------- CONTENT CARDS ---------- */
     .content-card {
-        background: rgba(30, 41, 59, 0.6);
-        border: 1px solid rgba(148, 163, 184, 0.12);
-        border-radius: 20px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-        backdrop-filter: blur(10px);
+        background: rgba(30, 41, 59, 0.5);
+        border: 1px solid rgba(148, 163, 184, 0.1);
+        border-radius: 16px;
+        padding: 1.2rem;
+        margin-bottom: 0.8rem;
     }
 
-    /* ---------- INSIGHT BOXES (Tab-specific colors) ---------- */
+    /* ---------- INSIGHT BOXES ---------- */
     .insight-box {
-        border-radius: 16px;
-        padding: 1.25rem 1.5rem;
-        margin: 1rem 0;
+        border-radius: 14px;
+        padding: 1rem 1.2rem;
+        margin: 0.8rem 0;
         position: relative;
         overflow: hidden;
     }
@@ -214,128 +221,123 @@ st.markdown("""
     }
     .insight-title {
         font-weight: 700;
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.4rem;
         color: #f8fafc;
     }
     .insight-text {
         color: #cbd5e1;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         line-height: 1.6;
     }
-
-    /* Revenue theme - Emerald */
-    .theme-revenue { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05)); border: 1px solid rgba(16, 185, 129, 0.2); }
+    .theme-revenue { background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.03)); border: 1px solid rgba(16, 185, 129, 0.15); }
     .theme-revenue::before { background: #10b981; }
-
-    /* Orders theme - Blue */
-    .theme-orders { background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05)); border: 1px solid rgba(59, 130, 246, 0.2); }
+    .theme-orders { background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(37, 99, 235, 0.03)); border: 1px solid rgba(59, 130, 246, 0.15); }
     .theme-orders::before { background: #3b82f6; }
-
-    /* Customers theme - Violet */
-    .theme-customers { background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05)); border: 1px solid rgba(139, 92, 246, 0.2); }
+    .theme-customers { background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(124, 58, 237, 0.03)); border: 1px solid rgba(139, 92, 246, 0.15); }
     .theme-customers::before { background: #8b5cf6; }
-
-    /* Recommendations theme - Orange */
-    .theme-recs { background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05)); border: 1px solid rgba(245, 158, 11, 0.2); }
+    .theme-recs { background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(217, 119, 6, 0.03)); border: 1px solid rgba(245, 158, 11, 0.15); }
     .theme-recs::before { background: #f59e0b; }
-
-    /* SQL theme - Indigo */
-    .theme-sql { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(79, 70, 229, 0.05)); border: 1px solid rgba(99, 102, 241, 0.2); }
+    .theme-sql { background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(79, 70, 229, 0.03)); border: 1px solid rgba(99, 102, 241, 0.15); }
     .theme-sql::before { background: #6366f1; }
 
     /* ---------- STAT CARDS ---------- */
     .stat-row {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin: 1.5rem 0;
+        gap: 0.8rem;
+        margin: 1rem 0;
     }
     .stat-card {
-        background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-        border-radius: 20px;
-        padding: 1.5rem;
+        background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+        border-radius: 16px;
+        padding: 1.2rem;
         text-align: center;
-        border: 1px solid rgba(148, 163, 184, 0.15);
+        border: 1px solid rgba(148, 163, 184, 0.1);
     }
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-weight: 800;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.3rem;
     }
     .stat-label {
         color: #94a3b8;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         font-weight: 600;
     }
 
-    /* ---------- SQL QUERY CARDS ---------- */
+    /* ---------- SQL CARDS ---------- */
     .query-card {
-        background: rgba(15, 23, 42, 0.95);
-        border: 1px solid rgba(99, 102, 241, 0.25);
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-        font-family: 'SF Mono', 'Fira Code', monospace;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        border-radius: 14px;
+        padding: 1.2rem;
+        margin-bottom: 0.8rem;
     }
     .query-header {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
         color: #818cf8;
         font-weight: 700;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
     .query-sql {
         color: #e2e8f0;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         line-height: 1.7;
         white-space: pre-wrap;
+        font-family: 'SF Mono', 'Fira Code', monospace;
     }
-    .sql-keyword { color: #c084fc; font-weight: 600; }
-    .sql-func { color: #38bdf8; }
-    .sql-table { color: #fbbf24; }
-    .sql-string { color: #a5f3fc; }
 
     /* ---------- SIDEBAR ---------- */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%);
-        border-right: 1px solid rgba(148, 163, 184, 0.15);
+        border-right: 1px solid rgba(148, 163, 184, 0.12);
     }
     .sidebar-header {
-        padding: 1rem 0;
-        margin-bottom: 1rem;
+        padding: 0.8rem 0;
+        margin-bottom: 0.8rem;
         border-bottom: 1px solid rgba(148, 163, 184, 0.15);
     }
 
     /* ---------- FOOTER ---------- */
     .dashboard-footer {
-        margin-top: 4rem;
+        margin-top: 3rem;
         padding: 2rem;
         text-align: center;
-        border-top: 1px solid rgba(148, 163, 184, 0.15);
+        border-top: 1px solid rgba(148, 163, 184, 0.12);
         color: #64748b;
         font-size: 0.85rem;
     }
+    .dashboard-footer .author {
+        color: #94a3b8;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    .dashboard-footer .tagline {
+        color: #818cf8;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
 
     /* ---------- SCROLLBAR ---------- */
-    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 
     /* Responsive */
     @media (max-width: 1200px) {
         .kpi-grid { grid-template-columns: repeat(3, 1fr); }
-        .stat-row { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
         .kpi-grid { grid-template-columns: repeat(2, 1fr); }
         .stat-row { grid-template-columns: 1fr; }
-        .hero-title { font-size: 1.75rem; }
+        .hero-title { font-size: 1.5rem; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -387,10 +389,8 @@ if data_loaded:
     st.markdown("""
     <div class="hero-container">
         <div class="hero-title">📊 Olist Business Analytics</div>
-        <div class="hero-subtitle">
-            End-to-end business intelligence analysis of Brazilian e-commerce performance
-        </div>
-        <div style="margin-top: 1rem;">
+        <div class="hero-subtitle">End-to-end business intelligence analysis of Brazilian e-commerce performance</div>
+        <div>
             <span class="hero-badge">📦 100K+ Orders</span>
             <span class="hero-badge">💰 Revenue Analytics</span>
             <span class="hero-badge">👥 Customer Intelligence</span>
@@ -405,7 +405,7 @@ if data_loaded:
     # ========================================================
 
     with st.sidebar:
-        st.markdown('<div class="sidebar-header"><h3 style="color:#f8fafc; margin:0;">🔍 Filters</h3><p style="color:#94a3b8; font-size:0.8rem; margin:0;">Refine your analysis</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-header"><h3 style="color:#f8fafc; margin:0; font-size:1.1rem;">🔍 Filters</h3><p style="color:#94a3b8; font-size:0.75rem; margin:0;">Refine your analysis</p></div>', unsafe_allow_html=True)
         
         min_date = orders["order_purchase_timestamp"].min().date()
         max_date = orders["order_purchase_timestamp"].max().date()
@@ -416,9 +416,9 @@ if data_loaded:
         selected_state = st.selectbox("Customer State", states)
         
         st.markdown("""
-        <div style="margin-top: 2rem; padding: 1rem; background: rgba(99,102,241,0.1); border-radius: 12px; border: 1px solid rgba(99,102,241,0.2);">
-            <div style="color: #c7d2fe; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem;">💡 Tip</div>
-            <div style="color: #94a3b8; font-size: 0.75rem;">Use filters to dynamically explore regional and temporal performance patterns.</div>
+        <div style="margin-top: 1.5rem; padding: 0.8rem; background: rgba(99,102,241,0.08); border-radius: 10px; border: 1px solid rgba(99,102,241,0.15);">
+            <div style="color: #c7d2fe; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.3rem;">💡 Tip</div>
+            <div style="color: #94a3b8; font-size: 0.7rem;">Use filters to explore regional and temporal patterns.</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -461,7 +461,7 @@ if data_loaded:
     total_categories = products["product_category_name"].nunique()
 
     # ========================================================
-    # KPI CARDS (Top Row)
+    # KPI CARDS — 6 CARDS WITH PRODUCT CATEGORY PROMINENT
     # ========================================================
 
     st.markdown(f"""
@@ -470,31 +470,37 @@ if data_loaded:
             <div class="kpi-icon">💰</div>
             <div class="kpi-label">Total Revenue</div>
             <div class="kpi-value">R$ {total_revenue:,.0f}</div>
-            <div class="kpi-desc">Payment value across all orders</div>
+            <div class="kpi-desc">Payment value</div>
         </div>
         <div class="kpi-card kpi-accent-2">
             <div class="kpi-icon">📦</div>
             <div class="kpi-label">Total Orders</div>
             <div class="kpi-value">{total_orders:,}</div>
-            <div class="kpi-desc">Unique order IDs in selection</div>
+            <div class="kpi-desc">Unique order IDs</div>
         </div>
         <div class="kpi-card kpi-accent-3">
             <div class="kpi-icon">📈</div>
             <div class="kpi-label">Avg Order Value</div>
             <div class="kpi-value">R$ {aov:,.2f}</div>
-            <div class="kpi-desc">Mean payment per order</div>
+            <div class="kpi-desc">Mean payment</div>
         </div>
         <div class="kpi-card kpi-accent-4">
             <div class="kpi-icon">👥</div>
             <div class="kpi-label">Unique Customers</div>
             <div class="kpi-value">{total_customers:,}</div>
-            <div class="kpi-desc">Distinct customer profiles</div>
+            <div class="kpi-desc">customer_unique_id</div>
         </div>
         <div class="kpi-card kpi-accent-5">
             <div class="kpi-icon">🛍️</div>
-            <div class="kpi-label">Product Diversity</div>
+            <div class="kpi-label">Unique Products</div>
             <div class="kpi-value">{total_products:,}</div>
-            <div class="kpi-desc">Across {total_categories} categories</div>
+            <div class="kpi-desc">Distinct items sold</div>
+        </div>
+        <div class="kpi-card kpi-accent-6">
+            <div class="kpi-icon">🏷️</div>
+            <div class="kpi-label">Product Categories</div>
+            <div class="kpi-value">{total_categories}</div>
+            <div class="kpi-desc">Total categories</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -508,41 +514,37 @@ if data_loaded:
     ])
 
     # ========================================================
-    # TAB 1 — REVENUE (Emerald/Green Theme)
+    # TAB 1 — REVENUE (Emerald Theme)
     # ========================================================
 
     with tab1:
         st.markdown("""
         <div class="section-header">
             <div class="section-header-title"><span style="color:#10b981;">💰</span> Revenue Performance</div>
-            <div class="section-header-sub">Track revenue trends, category contributions, and geographic distribution</div>
+            <div class="section-header-sub">Track revenue trends and category contributions</div>
         </div>
         """, unsafe_allow_html=True)
 
-        # Monthly Revenue Area Chart
         monthly_rev = orders_with_payments.groupby("order_month")["payment_value"].sum().reset_index()
         
         fig = px.area(
             monthly_rev, x="order_month", y="payment_value",
-            markers=True, title=None,
-            color_discrete_sequence=["#10b981"]
+            markers=True, title=None, color_discrete_sequence=["#10b981"]
         )
         fig.update_layout(
-            template="plotly_dark", height=420,
+            template="plotly_dark", height=380,
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-            margin=dict(l=20, r=20, t=40, b=20),
+            margin=dict(l=20, r=20, t=30, b=20),
             xaxis_title="Month", yaxis_title="Revenue (R$)",
-            font=dict(family="Inter, sans-serif"),
-            title=dict(font=dict(size=16, color="#f8fafc"))
+            font=dict(family="Inter, sans-serif", size=12),
+            title=dict(font=dict(size=14, color="#f8fafc"))
         )
-        fig.update_traces(line=dict(width=3), marker=dict(size=6))
-        
+        fig.update_traces(line=dict(width=3), marker=dict(size=5))
+        fig.update_xaxes(tickangle=45)
         st.plotly_chart(fig, use_container_width=True)
 
-        # Category Revenue
-        st.markdown('<div style="margin-top: 2rem;">', unsafe_allow_html=True)
         st.markdown("""
-        <div class="section-header" style="margin-top:0;">
+        <div class="section-header" style="margin-top:1rem;">
             <div class="section-header-title"><span style="color:#10b981;">🏷️</span> Top Product Categories</div>
             <div class="section-header-sub">Highest revenue-generating product segments</div>
         </div>
@@ -553,20 +555,18 @@ if data_loaded:
 
         fig2 = px.bar(
             cat_rev, x="price", y="product_category_name", orientation="h",
-            text_auto=".2s", title=None,
-            color="price", color_continuous_scale="Teal"
+            text_auto=".2s", title=None, color="price", color_continuous_scale="Teal"
         )
         fig2.update_layout(
-            template="plotly_dark", height=450,
+            template="plotly_dark", height=400,
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
             margin=dict(l=20, r=20, t=30, b=20),
             yaxis_title="", xaxis_title="Revenue (R$)",
-            font=dict(family="Inter, sans-serif"),
+            font=dict(family="Inter, sans-serif", size=12),
             coloraxis_showscale=False
         )
         st.plotly_chart(fig2, use_container_width=True)
 
-        # Insight
         if not cat_rev.empty:
             top_cat = cat_rev.iloc[0]["product_category_name"]
             top_val = cat_rev.iloc[0]["price"]
@@ -574,20 +574,20 @@ if data_loaded:
             <div class="insight-box theme-revenue">
                 <div class="insight-title">⭐ Category Leader</div>
                 <div class="insight-text">
-                    <b>{top_cat}</b> dominates the selected period, generating approximately <b>R$ {top_val:,.2f}</b> in product-item revenue. This indicates strong market demand in this segment.
+                    <b>{top_cat}</b> leads with <b>R$ {top_val:,.2f}</b> in revenue. This segment should be prioritized for inventory and marketing investment.
                 </div>
             </div>
             """, unsafe_allow_html=True)
 
     # ========================================================
-    # TAB 2 — ORDERS (Blue Theme)
+    # TAB 2 — ORDERS (Blue Theme) — FIXED PIE CHART
     # ========================================================
 
     with tab2:
         st.markdown("""
         <div class="section-header">
             <div class="section-header-title"><span style="color:#3b82f6;">📦</span> Order Performance</div>
-            <div class="section-header-sub">Analyze order volume, status distribution, and fulfillment metrics</div>
+            <div class="section-header-sub">Analyze order volume and fulfillment metrics</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -597,33 +597,63 @@ if data_loaded:
             monthly_orders = filtered_orders.groupby("order_month")["order_id"].nunique().reset_index()
             fig = px.bar(
                 monthly_orders, x="order_month", y="order_id",
-                text_auto=True, title=None,
-                color_discrete_sequence=["#3b82f6"]
+                text_auto=True, title=None, color_discrete_sequence=["#3b82f6"]
             )
             fig.update_layout(
-                template="plotly_dark", height=380,
+                template="plotly_dark", height=350,
                 paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                 margin=dict(l=20, r=20, t=30, b=20),
                 xaxis_title="Month", yaxis_title="Orders",
-                font=dict(family="Inter, sans-serif")
+                font=dict(family="Inter, sans-serif", size=12)
             )
+            fig.update_xaxes(tickangle=45)
             st.plotly_chart(fig, use_container_width=True)
 
         with c2:
+            # FIXED: Group small slices into "Other" for clean pie chart
             status_counts = filtered_orders["order_status"].value_counts().reset_index()
             status_counts.columns = ["status", "count"]
+            
+            # Group small statuses (< 2%) into Other
+            total_status = status_counts["count"].sum()
+            status_counts["pct"] = status_counts["count"] / total_status * 100
+            
+            main_statuses = status_counts[status_counts["pct"] >= 2].copy()
+            other_count = status_counts[status_counts["pct"] < 2]["count"].sum()
+            
+            if other_count > 0:
+                other_row = pd.DataFrame([{"status": "Other", "count": other_count, "pct": other_count/total_status*100}])
+                main_statuses = pd.concat([main_statuses, other_row], ignore_index=True)
+            
+            # Sort by count descending
+            main_statuses = main_statuses.sort_values("count", ascending=False)
+            
+            # Custom blue color scale
+            blue_colors = ["#1e40af", "#3b82f6", "#60a5fa", "#93c5fd", "#bfdbfe", "#dbeafe"]
+            
             fig = px.pie(
-                status_counts, values="count", names="status", hole=0.55,
-                title=None, color_discrete_sequence=px.colors.sequential.Blues_r
+                main_statuses, values="count", names="status", hole=0.55,
+                title=None, color_discrete_sequence=blue_colors
             )
             fig.update_layout(
-                template="plotly_dark", height=380,
+                template="plotly_dark", height=350,
                 paper_bgcolor="rgba(0,0,0,0)",
                 margin=dict(l=20, r=20, t=30, b=20),
-                font=dict(family="Inter, sans-serif"),
-                showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.1)
+                font=dict(family="Inter, sans-serif", size=12),
+                showlegend=True,
+                legend=dict(
+                    orientation="h", yanchor="bottom", y=-0.15,
+                    xanchor="center", x=0.5,
+                    font=dict(size=11)
+                )
             )
-            fig.update_traces(textinfo="percent+label", pull=[0.02 if s == "delivered" else 0 for s in status_counts["status"]])
+            fig.update_traces(
+                textinfo="percent",
+                textposition="inside",
+                textfont=dict(size=13, color="white", family="Inter, sans-serif"),
+                pull=[0.03 if s == "delivered" else 0 for s in main_statuses["status"]],
+                marker=dict(line=dict(color="#0f172a", width=2))
+            )
             st.plotly_chart(fig, use_container_width=True)
 
         # Stats Row
@@ -651,7 +681,7 @@ if data_loaded:
         <div class="insight-box theme-orders">
             <div class="insight-title">📌 Fulfillment Insight</div>
             <div class="insight-text">
-                Out of <b>{total_orders:,}</b> orders in the selected period, <b>{delivered_count:,}</b> have been successfully delivered, achieving a fulfillment rate of <b>{delivery_rate:.2f}%</b>. Monitor non-delivered statuses for operational improvements.
+                <b>{delivered_count:,}</b> of <b>{total_orders:,}</b> orders delivered successfully (<b>{delivery_rate:.1f}%</b>). Monitor non-delivered statuses for operational improvements.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -664,7 +694,7 @@ if data_loaded:
         st.markdown("""
         <div class="section-header">
             <div class="section-header-title"><span style="color:#8b5cf6;">👥</span> Customer Intelligence</div>
-            <div class="section-header-sub">Segmentation, retention patterns, and geographic distribution</div>
+            <div class="section-header-sub">Segmentation, retention, and geographic distribution</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -689,33 +719,32 @@ if data_loaded:
                 title=None, color_discrete_sequence=["#8b5cf6", "#a78bfa", "#c4b5fd"]
             )
             fig.update_layout(
-                template="plotly_dark", height=380,
+                template="plotly_dark", height=350,
                 paper_bgcolor="rgba(0,0,0,0)",
                 margin=dict(l=20, r=20, t=30, b=20),
-                font=dict(family="Inter, sans-serif"),
-                showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.1)
+                font=dict(family="Inter, sans-serif", size=12),
+                showlegend=True,
+                legend=dict(orientation="h", yanchor="bottom", y=-0.15, xanchor="center", x=0.5)
             )
-            fig.update_traces(textinfo="percent+label")
+            fig.update_traces(textinfo="percent+label", textfont=dict(size=12))
             st.plotly_chart(fig, use_container_width=True)
 
         with c2:
             state_cust = orders_full.groupby("customer_state")["customer_unique_id"].nunique().reset_index().sort_values("customer_unique_id", ascending=False).head(10)
             fig = px.bar(
                 state_cust, x="customer_state", y="customer_unique_id",
-                text_auto=True, title=None,
-                color="customer_unique_id", color_continuous_scale="Purples"
+                text_auto=True, title=None, color="customer_unique_id", color_continuous_scale="Purples"
             )
             fig.update_layout(
-                template="plotly_dark", height=380,
+                template="plotly_dark", height=350,
                 paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                 margin=dict(l=20, r=20, t=30, b=20),
                 xaxis_title="State", yaxis_title="Unique Customers",
-                font=dict(family="Inter, sans-serif"),
+                font=dict(family="Inter, sans-serif", size=12),
                 coloraxis_showscale=False
             )
             st.plotly_chart(fig, use_container_width=True)
 
-        # Retention Stats
         repeat_customers = cust_orders[cust_orders["order_count"] > 1]["customer_unique_id"].nunique()
         customer_count = cust_orders["customer_unique_id"].nunique()
         repeat_rate = (repeat_customers / customer_count * 100) if customer_count > 0 else 0
@@ -741,7 +770,7 @@ if data_loaded:
         <div class="insight-box theme-customers">
             <div class="insight-title">🎯 Retention Opportunity</div>
             <div class="insight-text">
-                Customer frequency segmentation reveals distinct behavioral clusters. High-frequency customers represent the most valuable segment for loyalty programs, while low-frequency segments present the largest re-engagement opportunity.
+                High-frequency customers represent the most valuable segment for loyalty programs, while low-frequency segments present the largest re-engagement opportunity.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -754,7 +783,7 @@ if data_loaded:
         st.markdown("""
         <div class="section-header">
             <div class="section-header-title"><span style="color:#f59e0b;">🤖</span> Recommendation Insights</div>
-            <div class="section-header-sub">Cross-selling patterns and category association analysis</div>
+            <div class="section-header-sub">Cross-selling patterns and category associations</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -782,20 +811,18 @@ if data_loaded:
             
             fig = px.bar(
                 pair_counts.head(10), x="frequency", y="pair", orientation="h",
-                text_auto=True, title=None,
-                color="frequency", color_continuous_scale="YlOrBr"
+                text_auto=True, title=None, color="frequency", color_continuous_scale="YlOrBr"
             )
             fig.update_layout(
-                template="plotly_dark", height=450,
+                template="plotly_dark", height=400,
                 paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                 margin=dict(l=20, r=20, t=30, b=20),
                 xaxis_title="Co-purchase Frequency", yaxis_title="",
-                font=dict(family="Inter, sans-serif"),
+                font=dict(family="Inter, sans-serif", size=12),
                 coloraxis_showscale=False
             )
             st.plotly_chart(fig, use_container_width=True)
 
-        # Cross-category presence
         st.markdown("""
         <div class="section-header" style="margin-top:1rem;">
             <div class="section-header-title"><span style="color:#f59e0b;">🛒</span> Category Order Presence</div>
@@ -810,63 +837,29 @@ if data_loaded:
 
         fig = px.bar(
             category_orders, x="order_count", y="category", orientation="h",
-            text_auto=True, title=None,
-            color="order_count", color_continuous_scale="Oranges"
+            text_auto=True, title=None, color="order_count", color_continuous_scale="Oranges"
         )
         fig.update_layout(
-            template="plotly_dark", height=420,
+            template="plotly_dark", height=380,
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
             margin=dict(l=20, r=20, t=30, b=20),
             yaxis_title="", xaxis_title="Order Presence",
-            font=dict(family="Inter, sans-serif"),
+            font=dict(family="Inter, sans-serif", size=12),
             coloraxis_showscale=False
         )
         st.plotly_chart(fig, use_container_width=True)
-
-        # Interactive Explorer
-        st.markdown("""
-        <div class="section-header" style="margin-top:1rem;">
-            <div class="section-header-title"><span style="color:#f59e0b;">💡</span> Association Explorer</div>
-            <div class="section-header-sub">Select a category to discover cross-selling opportunities</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        top_categories = products["product_category_name"].dropna().value_counts().head(20).index.tolist()
-        
-        if top_categories:
-            selected_category = st.selectbox("Choose a category", top_categories, key="rec_select")
-            
-            if not pair_counts.empty:
-                related_pairs = pair_counts[(pair_counts["category_1"] == selected_category) | (pair_counts["category_2"] == selected_category)].head(5)
-                
-                if not related_pairs.empty:
-                    rec_cols = st.columns(min(len(related_pairs), 3))
-                    for idx, (_, row) in enumerate(related_pairs.iterrows()):
-                        recommended = row["category_2"] if row["category_1"] == selected_category else row["category_1"]
-                        with rec_cols[idx % 3]:
-                            st.markdown(f"""
-                            <div style="background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(217,119,6,0.05)); 
-                                        border: 1px solid rgba(245,158,11,0.25); border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem;">
-                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🛍️</div>
-                                <div style="color: #fbbf24; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.25rem;">RECOMMENDATION</div>
-                                <div style="color: #f8fafc; font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem;">{recommended}</div>
-                                <div style="color: #cbd5e1; font-size: 0.8rem;">Co-purchased <b>{row["frequency"]}</b> times</div>
-                            </div>
-                            """, unsafe_allow_html=True)
-                else:
-                    st.info("No strong associations found for this category.")
 
         st.markdown("""
         <div class="insight-box theme-recs">
             <div class="insight-title">🚀 Business Application</div>
             <div class="insight-text">
-                These co-purchase patterns enable data-driven product bundling, personalized recommendation engines, and targeted marketing campaigns to increase basket size and customer lifetime value.
+                Co-purchase patterns enable data-driven product bundling, personalized recommendations, and targeted campaigns to increase basket size and customer lifetime value.
             </div>
         </div>
         """, unsafe_allow_html=True)
 
     # ========================================================
-    # TAB 5 — SQL SHOWCASE (Indigo Theme — NO RAW CODE BLOCKS)
+    # TAB 5 — SQL SHOWCASE (Indigo Theme)
     # ========================================================
 
     with tab5:
@@ -878,10 +871,10 @@ if data_loaded:
         """, unsafe_allow_html=True)
 
         st.markdown("""
-        <div class="insight-box theme-sql" style="margin-bottom: 2rem;">
+        <div class="insight-box theme-sql" style="margin-bottom: 1.5rem;">
             <div class="insight-title">🔎 From SQL to Business Insights</div>
             <div class="insight-text">
-                Every visualization in this dashboard is validated by structured SQL queries against the Olist relational schema. Below are the core queries that calculate the business metrics you see above.
+                Every visualization is validated by structured SQL queries against the Olist relational schema. Below are the core queries calculating the business metrics.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -911,7 +904,6 @@ if data_loaded:
              "SELECT\n    c.customer_unique_id,\n    ROUND(SUM(p.payment_value), 2) AS customer_lifetime_revenue\nFROM orders o\nJOIN customers c ON o.customer_id = c.customer_id\nJOIN payments p ON p.order_id = o.order_id\nGROUP BY c.customer_unique_id\nORDER BY customer_lifetime_revenue DESC\nLIMIT 10;")
         ]
 
-        # Display queries in a clean, styled grid
         for i in range(0, len(queries), 2):
             cols = st.columns(2)
             for j in range(2):
@@ -925,9 +917,8 @@ if data_loaded:
                         </div>
                         """, unsafe_allow_html=True)
 
-        # Dataset Validation Metrics
         st.markdown("""
-        <div class="section-header" style="margin-top:2rem;">
+        <div class="section-header" style="margin-top:1.5rem;">
             <div class="section-header-title"><span style="color:#6366f1;">📊</span> Dataset Validation</div>
             <div class="section-header-sub">Core entity counts across the entire dataset</div>
         </div>
@@ -937,34 +928,36 @@ if data_loaded:
         with v1:
             st.markdown(f"""
             <div class="content-card" style="text-align: center;">
-                <div style="font-size: 2rem; font-weight: 800; color: #818cf8; margin-bottom: 0.5rem;">{products["product_id"].nunique():,}</div>
-                <div style="color: #94a3b8; font-weight: 600; font-size: 0.9rem;">Unique Products</div>
+                <div style="font-size: 1.8rem; font-weight: 800; color: #818cf8; margin-bottom: 0.3rem;">{products["product_id"].nunique():,}</div>
+                <div style="color: #94a3b8; font-weight: 600; font-size: 0.85rem;">Unique Products</div>
             </div>
             """, unsafe_allow_html=True)
         with v2:
             st.markdown(f"""
             <div class="content-card" style="text-align: center;">
-                <div style="font-size: 2rem; font-weight: 800; color: #818cf8; margin-bottom: 0.5rem;">{products["product_category_name"].nunique():,}</div>
-                <div style="color: #94a3b8; font-weight: 600; font-size: 0.9rem;">Product Categories</div>
+                <div style="font-size: 1.8rem; font-weight: 800; color: #818cf8; margin-bottom: 0.3rem;">{products["product_category_name"].nunique():,}</div>
+                <div style="color: #94a3b8; font-weight: 600; font-size: 0.85rem;">Product Categories</div>
             </div>
             """, unsafe_allow_html=True)
         with v3:
             st.markdown(f"""
             <div class="content-card" style="text-align: center;">
-                <div style="font-size: 2rem; font-weight: 800; color: #818cf8; margin-bottom: 0.5rem;">{customers["customer_unique_id"].nunique():,}</div>
-                <div style="color: #94a3b8; font-weight: 600; font-size: 0.9rem;">Unique Customers</div>
+                <div style="font-size: 1.8rem; font-weight: 800; color: #818cf8; margin-bottom: 0.3rem;">{customers["customer_unique_id"].nunique():,}</div>
+                <div style="color: #94a3b8; font-weight: 600; font-size: 0.85rem;">Unique Customers</div>
             </div>
             """, unsafe_allow_html=True)
 
     # ========================================================
-    # FOOTER
+    # FOOTER — AUTHOR INFO
     # ========================================================
 
     st.markdown("""
     <div class="dashboard-footer">
-        <div style="font-weight: 700; color: #94a3b8; margin-bottom: 0.5rem;">Olist Business Analytics Suite</div>
-        <div>Built with SQL · Python · Streamlit · Plotly</div>
-        <div style="margin-top: 0.5rem; font-size: 0.75rem;">Business Intelligence & Data Analytics Portfolio Project</div>
+        <div class="author">Author: Varshini A S</div>
+        <div class="tagline">🚀 Open for Internship and Freelancing Opportunities</div>
+        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">
+            Built with SQL · Python · Streamlit · Plotly
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
