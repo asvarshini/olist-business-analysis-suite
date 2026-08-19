@@ -212,13 +212,14 @@ Olist-Business-Analysis-Suite/
 │
 ├── 01_dataset/
 │   └── 00_raw_data/
-│       ├── Raw Olist CSV files
-│       └── Cleaned analysis files
+│            ├── Raw Olist CSV files
+│    |___01_Cleaned_data/
+│      └── Cleaned analysis files
+│             ├── data_validation_cleaning.sql
 │
 ├── 02_schema_design/
 │
 ├── 03_sql_queries/
-│   ├── data_validation_cleaning.sql
 │   ├── revenue_analysis.sql
 │   ├── order_performance.sql
 │   └── customer_performance.sql
