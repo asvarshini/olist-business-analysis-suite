@@ -55,16 +55,4 @@ FROM orders
 GROUP BY order_status
 ORDER BY total_orders DESC;
 
--- =====================================================
--- KPI 6 : AVERAGE ORDER VALUE (AOV)
--- =====================================================
 
-SELECT
-AVG(t.order_total) AS average_order_value
-FROM (
-SELECT
-order_id,
-SUM(price) AS order_total
-FROM order_items
-GROUP BY order_id
-) t;
