@@ -16,226 +16,329 @@ st.set_page_config(
 )
 
 # ============================================================
-# CUSTOM CSS
+# CUSTOM CSS — Multi-theme Professional Dashboard
 # ============================================================
 
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-    /* ---------- GLOBAL ---------- */
+    html, body, .stApp {
+        font-family: 'Inter', sans-serif;
+    }
 
     .stApp {
-        background:
-            radial-gradient(circle at 10% 10%, rgba(99,102,241,0.10), transparent 25%),
-            radial-gradient(circle at 90% 20%, rgba(14,165,233,0.08), transparent 25%),
-            #0b1120;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
     }
 
     .block-container {
-        padding-top: 1.5rem;
-        padding-bottom: 2rem;
-        max-width: 1500px;
+        padding-top: 1rem;
+        padding-bottom: 3rem;
+        max-width: 1400px;
     }
 
-    h1, h2, h3 {
-        color: #f8fafc !important;
+    h1, h2, h3, h4 {
+        font-family: 'Inter', sans-serif !important;
+        letter-spacing: -0.02em;
     }
 
-    p, label {
-        color: #cbd5e1;
-    }
-
-    /* ---------- HERO ---------- */
-
-    .hero {
-        padding: 2.2rem 2.4rem;
+    /* ---------- HERO SECTION ---------- */
+    .hero-container {
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+        border: 1px solid rgba(148, 163, 184, 0.2);
         border-radius: 24px;
-        margin-bottom: 1.5rem;
-        background:
-            linear-gradient(
-                135deg,
-                rgba(79,70,229,0.28),
-                rgba(14,165,233,0.18),
-                rgba(15,23,42,0.85)
-            );
-        border: 1px solid rgba(148,163,184,0.16);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
     }
-
+    .hero-container::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
+        pointer-events: none;
+    }
     .hero-title {
-        font-size: 2.35rem;
+        font-size: 2.5rem;
         font-weight: 800;
         color: #f8fafc;
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 1;
     }
-
     .hero-subtitle {
-        font-size: 1rem;
-        color: #cbd5e1;
-        margin-bottom: 1.2rem;
+        font-size: 1.1rem;
+        color: #94a3b8;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
     }
-
-    .hero-tag {
-        display: inline-block;
-        padding: 0.45rem 0.8rem;
-        margin-right: 0.45rem;
-        border-radius: 999px;
-        background: rgba(99,102,241,0.18);
-        border: 1px solid rgba(129,140,248,0.25);
-        color: #c7d2fe;
-        font-size: 0.82rem;
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 100px;
+        color: #e2e8f0;
+        font-size: 0.85rem;
         font-weight: 600;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        backdrop-filter: blur(10px);
     }
 
     /* ---------- KPI CARDS ---------- */
-
-    .metric-card {
-        padding: 1.15rem 1.2rem;
-        min-height: 125px;
-        border-radius: 18px;
-        background: rgba(15,23,42,0.78);
-        border: 1px solid rgba(148,163,184,0.14);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
     }
-
-    .metric-label {
-        font-size: 0.82rem;
+    .kpi-card {
+        background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+        border: 1px solid rgba(148, 163, 184, 0.15);
+        border-radius: 20px;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+    .kpi-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(148, 163, 184, 0.3);
+    }
+    .kpi-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+    .kpi-label {
+        font-size: 0.8rem;
         color: #94a3b8;
-        margin-bottom: 0.35rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
     }
-
-    .metric-value {
-        font-size: 1.65rem;
+    .kpi-value {
+        font-size: 1.8rem;
         font-weight: 800;
         color: #f8fafc;
+        line-height: 1;
     }
-
-    .metric-description {
+    .kpi-desc {
         font-size: 0.75rem;
         color: #64748b;
-        margin-top: 0.35rem;
+        margin-top: 0.5rem;
     }
+    .kpi-accent-1 { border-top: 3px solid #10b981; }
+    .kpi-accent-2 { border-top: 3px solid #3b82f6; }
+    .kpi-accent-3 { border-top: 3px solid #f59e0b; }
+    .kpi-accent-4 { border-top: 3px solid #8b5cf6; }
+    .kpi-accent-5 { border-top: 3px solid #ec4899; }
 
-    /* ---------- SECTION HEADER ---------- */
-
-    .section-title {
-        font-size: 1.35rem;
-        font-weight: 750;
-        color: #f8fafc;
-        margin-top: 1rem;
-        margin-bottom: 0.25rem;
+    /* ---------- SECTION HEADERS ---------- */
+    .section-header {
+        margin: 2rem 0 1.5rem 0;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.15);
     }
-
-    .section-subtitle {
-        color: #94a3b8;
-        font-size: 0.88rem;
-        margin-bottom: 1rem;
-    }
-
-    /* ---------- INSIGHT CARDS ---------- */
-
-    .insight {
-        padding: 1.15rem 1.3rem;
-        border-radius: 18px;
-        margin: 0.5rem 0;
-        background: rgba(15,23,42,0.72);
-        border: 1px solid rgba(148,163,184,0.13);
-    }
-
-    .insight-purple {
-        border-left: 4px solid #8b5cf6;
-    }
-
-    .insight-blue {
-        border-left: 4px solid #38bdf8;
-    }
-
-    .insight-green {
-        border-left: 4px solid #34d399;
-    }
-
-    .insight-orange {
-        border-left: 4px solid #f59e0b;
-    }
-
-    .insight-title {
+    .section-header-title {
+        font-size: 1.4rem;
         font-weight: 700;
         color: #f8fafc;
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .section-header-sub {
+        color: #94a3b8;
+        font-size: 0.9rem;
     }
 
+    /* ---------- TAB CUSTOMIZATION ---------- */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background: rgba(15, 23, 42, 0.6);
+        padding: 0.5rem;
+        border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, 0.15);
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 48px;
+        border-radius: 12px !important;
+        padding: 0 1.5rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #94a3b8;
+        border: none !important;
+        background: transparent;
+    }
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(56,189,248,0.2)) !important;
+        color: #f8fafc !important;
+        border: 1px solid rgba(129,140,248,0.3) !important;
+    }
+
+    /* ---------- CONTENT CARDS ---------- */
+    .content-card {
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 20px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        backdrop-filter: blur(10px);
+    }
+
+    /* ---------- INSIGHT BOXES (Tab-specific colors) ---------- */
+    .insight-box {
+        border-radius: 16px;
+        padding: 1.25rem 1.5rem;
+        margin: 1rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .insight-box::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+    }
+    .insight-title {
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #f8fafc;
+    }
     .insight-text {
         color: #cbd5e1;
-        font-size: 0.88rem;
-        line-height: 1.55;
+        font-size: 0.9rem;
+        line-height: 1.6;
     }
 
-    /* ---------- HIGHLIGHT BOX ---------- */
+    /* Revenue theme - Emerald */
+    .theme-revenue { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05)); border: 1px solid rgba(16, 185, 129, 0.2); }
+    .theme-revenue::before { background: #10b981; }
 
-    .highlight-box {
-        padding: 1.4rem;
+    /* Orders theme - Blue */
+    .theme-orders { background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05)); border: 1px solid rgba(59, 130, 246, 0.2); }
+    .theme-orders::before { background: #3b82f6; }
+
+    /* Customers theme - Violet */
+    .theme-customers { background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05)); border: 1px solid rgba(139, 92, 246, 0.2); }
+    .theme-customers::before { background: #8b5cf6; }
+
+    /* Recommendations theme - Orange */
+    .theme-recs { background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05)); border: 1px solid rgba(245, 158, 11, 0.2); }
+    .theme-recs::before { background: #f59e0b; }
+
+    /* SQL theme - Indigo */
+    .theme-sql { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(79, 70, 229, 0.05)); border: 1px solid rgba(99, 102, 241, 0.2); }
+    .theme-sql::before { background: #6366f1; }
+
+    /* ---------- STAT CARDS ---------- */
+    .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+    .stat-card {
+        background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
         border-radius: 20px;
-        background:
-            linear-gradient(
-                135deg,
-                rgba(99,102,241,0.14),
-                rgba(14,165,233,0.08)
-            );
-        border: 1px solid rgba(129,140,248,0.18);
-        margin: 1rem 0;
+        padding: 1.5rem;
+        text-align: center;
+        border: 1px solid rgba(148, 163, 184, 0.15);
     }
-
-    .highlight-number {
+    .stat-number {
         font-size: 2rem;
         font-weight: 800;
-        color: #a5b4fc;
+        margin-bottom: 0.5rem;
+    }
+    .stat-label {
+        color: #94a3b8;
+        font-size: 0.85rem;
+        font-weight: 600;
     }
 
-    .highlight-label {
-        color: #cbd5e1;
-        font-size: 0.85rem;
+    /* ---------- SQL QUERY CARDS ---------- */
+    .query-card {
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(99, 102, 241, 0.25);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        font-family: 'SF Mono', 'Fira Code', monospace;
     }
+    .query-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        color: #818cf8;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .query-sql {
+        color: #e2e8f0;
+        font-size: 0.85rem;
+        line-height: 1.7;
+        white-space: pre-wrap;
+    }
+    .sql-keyword { color: #c084fc; font-weight: 600; }
+    .sql-func { color: #38bdf8; }
+    .sql-table { color: #fbbf24; }
+    .sql-string { color: #a5f3fc; }
 
     /* ---------- SIDEBAR ---------- */
-
     [data-testid="stSidebar"] {
-        background: #0f172a;
-        border-right: 1px solid rgba(148,163,184,0.12);
+        background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%);
+        border-right: 1px solid rgba(148, 163, 184, 0.15);
     }
-
-    .sidebar-title {
-        font-size: 1.2rem;
-        font-weight: 750;
-        color: #f8fafc;
-        margin-bottom: 0.2rem;
-    }
-
-    .sidebar-subtitle {
-        color: #94a3b8;
-        font-size: 0.8rem;
+    .sidebar-header {
+        padding: 1rem 0;
         margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.15);
     }
 
     /* ---------- FOOTER ---------- */
-
-    .footer {
-        margin-top: 3rem;
-        padding: 1.5rem;
+    .dashboard-footer {
+        margin-top: 4rem;
+        padding: 2rem;
         text-align: center;
-        border-top: 1px solid rgba(148,163,184,0.12);
+        border-top: 1px solid rgba(148, 163, 184, 0.15);
         color: #64748b;
-        font-size: 0.82rem;
+        font-size: 0.85rem;
     }
 
-    /* ---------- TAB ---------- */
+    /* ---------- SCROLLBAR ---------- */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-    button[data-baseweb="tab"] {
-        font-weight: 650;
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+        .stat-row { grid-template-columns: repeat(2, 1fr); }
     }
-
+    @media (max-width: 768px) {
+        .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        .stat-row { grid-template-columns: 1fr; }
+        .hero-title { font-size: 1.75rem; }
+    }
 </style>
 """, unsafe_allow_html=True)
-
 
 # ============================================================
 # DATA LOADING
@@ -243,72 +346,33 @@ st.markdown("""
 
 @st.cache_data
 def load_data():
-
     def get_data_path(filename):
-
         local_path = f"../../01_dataset/00_raw_data/{filename}"
         cloud_path = f"01_dataset/00_raw_data/{filename}"
+        return local_path if os.path.exists(local_path) else cloud_path
 
-        if os.path.exists(local_path):
-            return local_path
+    orders = pd.read_csv(get_data_path("olist_orders_dataset.csv"))
+    order_items = pd.read_csv(get_data_path("olist_order_items_dataset.csv"))
+    payments = pd.read_csv(get_data_path("olist_order_payments_dataset.csv"))
+    customers = pd.read_csv(get_data_path("olist_customers_dataset.csv"))
+    products = pd.read_csv(get_data_path("olist_products_dataset.csv"))
 
-        return cloud_path
-
-    orders = pd.read_csv(
-        get_data_path("olist_orders_dataset.csv")
-    )
-
-    order_items = pd.read_csv(
-        get_data_path("olist_order_items_dataset.csv")
-    )
-
-    payments = pd.read_csv(
-        get_data_path("olist_order_payments_dataset.csv")
-    )
-
-    customers = pd.read_csv(
-        get_data_path("olist_customers_dataset.csv")
-    )
-
-    products = pd.read_csv(
-        get_data_path("olist_products_dataset.csv")
-    )
-
-    # Dates
-    orders["order_purchase_timestamp"] = pd.to_datetime(
-        orders["order_purchase_timestamp"],
-        errors="coerce"
-    )
-
-    orders["order_month"] = (
-        orders["order_purchase_timestamp"]
-        .dt.to_period("M")
-        .astype(str)
-    )
-
+    orders["order_purchase_timestamp"] = pd.to_datetime(orders["order_purchase_timestamp"], errors="coerce")
+    orders["order_month"] = orders["order_purchase_timestamp"].dt.to_period("M").astype(str)
+    
     return orders, order_items, payments, customers, products
-
 
 # ============================================================
 # LOAD DATA
 # ============================================================
 
 try:
-
     orders, order_items, payments, customers, products = load_data()
-
     data_loaded = True
-
 except Exception as e:
-
     st.error(f"Error loading data: {e}")
-    st.info(
-        "Make sure the Olist CSV files are available inside "
-        "01_dataset/00_raw_data/"
-    )
-
+    st.info("Ensure Olist CSV files are in `01_dataset/00_raw_data/`")
     data_loaded = False
-
 
 # ============================================================
 # MAIN APPLICATION
@@ -317,1556 +381,592 @@ except Exception as e:
 if data_loaded:
 
     # ========================================================
-    # HERO
+    # HERO SECTION
     # ========================================================
 
     st.markdown("""
-    <div class="hero">
-
-        <div class="hero-title">
-            📊 Olist Business Analytics Suite
-        </div>
-
+    <div class="hero-container">
+        <div class="hero-title">📊 Olist Business Analytics</div>
         <div class="hero-subtitle">
-            End-to-end business intelligence analysis of Brazilian
-            e-commerce performance using SQL, Python and Streamlit.
+            End-to-end business intelligence analysis of Brazilian e-commerce performance
         </div>
-
-        <span class="hero-tag">100K+ Orders</span>
-        <span class="hero-tag">SQL Analytics</span>
-        <span class="hero-tag">Customer Intelligence</span>
-        <span class="hero-tag">Revenue Analytics</span>
-        <span class="hero-tag">Interactive Dashboard</span>
-
+        <div style="margin-top: 1rem;">
+            <span class="hero-badge">📦 100K+ Orders</span>
+            <span class="hero-badge">💰 Revenue Analytics</span>
+            <span class="hero-badge">👥 Customer Intelligence</span>
+            <span class="hero-badge">🤖 Recommendations</span>
+            <span class="hero-badge">🧠 SQL Analytics</span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-
     # ========================================================
-    # SIDEBAR
+    # SIDEBAR FILTERS
     # ========================================================
 
-    st.sidebar.markdown("""
-    <div class="sidebar-title">
-        🔍 Dashboard Filters
-    </div>
+    with st.sidebar:
+        st.markdown('<div class="sidebar-header"><h3 style="color:#f8fafc; margin:0;">🔍 Filters</h3><p style="color:#94a3b8; font-size:0.8rem; margin:0;">Refine your analysis</p></div>', unsafe_allow_html=True)
+        
+        min_date = orders["order_purchase_timestamp"].min().date()
+        max_date = orders["order_purchase_timestamp"].max().date()
+        
+        date_range = st.date_input("Date Range", value=(min_date, max_date), min_value=min_date, max_value=max_date)
+        
+        states = ["All"] + sorted(customers["customer_state"].dropna().unique().tolist())
+        selected_state = st.selectbox("Customer State", states)
+        
+        st.markdown("""
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(99,102,241,0.1); border-radius: 12px; border: 1px solid rgba(99,102,241,0.2);">
+            <div style="color: #c7d2fe; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem;">💡 Tip</div>
+            <div style="color: #94a3b8; font-size: 0.75rem;">Use filters to dynamically explore regional and temporal performance patterns.</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    <div class="sidebar-subtitle">
-        Explore business performance dynamically
-    </div>
-    """, unsafe_allow_html=True)
-
-    min_date = orders["order_purchase_timestamp"].min().date()
-    max_date = orders["order_purchase_timestamp"].max().date()
-
-    date_range = st.sidebar.date_input(
-        "Purchase Date",
-        value=(min_date, max_date),
-        min_value=min_date,
-        max_value=max_date
-    )
-
-    states = (
-        ["All"]
-        + sorted(
-            customers["customer_state"]
-            .dropna()
-            .unique()
-            .tolist()
-        )
-    )
-
-    selected_state = st.sidebar.selectbox(
-        "Customer State",
-        states
-    )
-
-    # Handle date selection safely
+    # Handle dates
     if len(date_range) == 2:
-
         start_date = pd.Timestamp(date_range[0])
         end_date = pd.Timestamp(date_range[1]) + pd.Timedelta(days=1)
-
     else:
-
         start_date = pd.Timestamp(min_date)
         end_date = pd.Timestamp(max_date) + pd.Timedelta(days=1)
 
-
     # ========================================================
-    # FILTER ORDERS
+    # FILTER LOGIC
     # ========================================================
 
-    mask = (
-        (orders["order_purchase_timestamp"] >= start_date)
-        &
-        (orders["order_purchase_timestamp"] < end_date)
-    )
-
+    mask = (orders["order_purchase_timestamp"] >= start_date) & (orders["order_purchase_timestamp"] < end_date)
     filtered_orders = orders.loc[mask].copy()
 
-    # State filter
     if selected_state != "All":
+        state_customer_ids = customers.loc[customers["customer_state"] == selected_state, "customer_id"]
+        filtered_orders = filtered_orders[filtered_orders["customer_id"].isin(state_customer_ids)]
 
-        state_customer_ids = customers.loc[
-            customers["customer_state"] == selected_state,
-            "customer_id"
-        ]
-
-        filtered_orders = filtered_orders[
-            filtered_orders["customer_id"].isin(
-                state_customer_ids
-            )
-        ]
-
-
-    # ========================================================
-    # MERGED DATA
-    # ========================================================
-
-    orders_with_payments = filtered_orders.merge(
-        payments,
-        on="order_id",
-        how="left"
-    )
-
-    orders_with_items = filtered_orders.merge(
-        order_items,
-        on="order_id",
-        how="left"
-    )
-
-    orders_full = filtered_orders.merge(
-        customers,
-        on="customer_id",
-        how="left"
-    )
-
+    # Merges
+    orders_with_payments = filtered_orders.merge(payments, on="order_id", how="left")
+    orders_with_items = filtered_orders.merge(order_items, on="order_id", how="left")
+    orders_full = filtered_orders.merge(customers, on="customer_id", how="left")
 
     # ========================================================
     # KPI CALCULATIONS
     # ========================================================
 
-    total_revenue = orders_with_payments[
-        "payment_value"
-    ].sum()
-
-    total_orders = filtered_orders[
-        "order_id"
-    ].nunique()
-
-    order_payment_totals = (
-        orders_with_payments
-        .groupby("order_id")["payment_value"]
-        .sum()
-    )
-
+    total_revenue = orders_with_payments["payment_value"].sum()
+    total_orders = filtered_orders["order_id"].nunique()
+    order_payment_totals = orders_with_payments.groupby("order_id")["payment_value"].sum()
     aov = order_payment_totals.mean()
-
-    filtered_customer_ids = (
-        filtered_orders["customer_id"]
-        .dropna()
-        .unique()
-    )
-
-    total_customers = customers[
-        customers["customer_id"].isin(
-            filtered_customer_ids
-        )
-    ]["customer_unique_id"].nunique()
-
-    # IMPORTANT:
-    # This is UNIQUE PRODUCTS, not categories.
-    total_products = orders_with_items[
-        "product_id"
-    ].nunique()
-
-    total_categories = products[
-        "product_category_name"
-    ].nunique()
-
+    
+    filtered_customer_ids = filtered_orders["customer_id"].dropna().unique()
+    total_customers = customers[customers["customer_id"].isin(filtered_customer_ids)]["customer_unique_id"].nunique()
+    total_products = orders_with_items["product_id"].nunique()
+    total_categories = products["product_category_name"].nunique()
 
     # ========================================================
-    # KPI CARDS
+    # KPI CARDS (Top Row)
     # ========================================================
 
-    st.markdown(
-        '<div class="section-title">Business Overview</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="section-subtitle">'
-        'Key performance indicators based on the selected filters.'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-    k1, k2, k3, k4, k5 = st.columns(5)
-
-    with k1:
-
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">💰 Total Revenue</div>
-            <div class="metric-value">R$ {total_revenue:,.0f}</div>
-            <div class="metric-description">
-                Payment value
-            </div>
+    st.markdown(f"""
+    <div class="kpi-grid">
+        <div class="kpi-card kpi-accent-1">
+            <div class="kpi-icon">💰</div>
+            <div class="kpi-label">Total Revenue</div>
+            <div class="kpi-value">R$ {total_revenue:,.0f}</div>
+            <div class="kpi-desc">Payment value across all orders</div>
         </div>
-        """, unsafe_allow_html=True)
-
-    with k2:
-
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">📦 Orders</div>
-            <div class="metric-value">{total_orders:,}</div>
-            <div class="metric-description">
-                Unique order IDs
-            </div>
+        <div class="kpi-card kpi-accent-2">
+            <div class="kpi-icon">📦</div>
+            <div class="kpi-label">Total Orders</div>
+            <div class="kpi-value">{total_orders:,}</div>
+            <div class="kpi-desc">Unique order IDs in selection</div>
         </div>
-        """, unsafe_allow_html=True)
-
-    with k3:
-
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">📈 Average Order Value</div>
-            <div class="metric-value">R$ {aov:,.2f}</div>
-            <div class="metric-description">
-                Average payment per order
-            </div>
+        <div class="kpi-card kpi-accent-3">
+            <div class="kpi-icon">📈</div>
+            <div class="kpi-label">Avg Order Value</div>
+            <div class="kpi-value">R$ {aov:,.2f}</div>
+            <div class="kpi-desc">Mean payment per order</div>
         </div>
-        """, unsafe_allow_html=True)
-
-    with k4:
-
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">👥 Unique Customers</div>
-            <div class="metric-value">{total_customers:,}</div>
-            <div class="metric-description">
-                customer_unique_id
-            </div>
+        <div class="kpi-card kpi-accent-4">
+            <div class="kpi-icon">👥</div>
+            <div class="kpi-label">Unique Customers</div>
+            <div class="kpi-value">{total_customers:,}</div>
+            <div class="kpi-desc">Distinct customer profiles</div>
         </div>
-        """, unsafe_allow_html=True)
-
-    with k5:
-
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">🛍️ Unique Products</div>
-            <div class="metric-value">{total_products:,}</div>
-            <div class="metric-description">
-                Across {total_categories} categories
-            </div>
+        <div class="kpi-card kpi-accent-5">
+            <div class="kpi-icon">🛍️</div>
+            <div class="kpi-label">Product Diversity</div>
+            <div class="kpi-value">{total_products:,}</div>
+            <div class="kpi-desc">Across {total_categories} categories</div>
         </div>
-        """, unsafe_allow_html=True)
-
+    </div>
+    """, unsafe_allow_html=True)
 
     # ========================================================
     # TABS
     # ========================================================
 
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "💰 Revenue",
-        "📦 Orders",
-        "👥 Customers",
-        "🤖 Recommendations",
-        "🧠 SQL Showcase"
+        "💰 Revenue", "📦 Orders", "👥 Customers", "🤖 Recommendations", "🧠 SQL Showcase"
     ])
 
-
     # ========================================================
-    # TAB 1 — REVENUE
+    # TAB 1 — REVENUE (Emerald/Green Theme)
     # ========================================================
 
     with tab1:
+        st.markdown("""
+        <div class="section-header">
+            <div class="section-header-title"><span style="color:#10b981;">💰</span> Revenue Performance</div>
+            <div class="section-header-sub">Track revenue trends, category contributions, and geographic distribution</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-        st.markdown(
-            '<div class="section-title">'
-            '💰 Revenue Performance'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div class="section-subtitle">'
-            'Understand revenue trends, product-category performance '
-            'and geographic contribution.'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        # ----------------------------------------------------
-        # Revenue summary
-        # ----------------------------------------------------
-
-        monthly_rev = (
-            orders_with_payments
-            .groupby("order_month")["payment_value"]
-            .sum()
-            .reset_index()
-        )
-
+        # Monthly Revenue Area Chart
+        monthly_rev = orders_with_payments.groupby("order_month")["payment_value"].sum().reset_index()
+        
         fig = px.area(
-            monthly_rev,
-            x="order_month",
-            y="payment_value",
-            markers=True,
-            title="Monthly Payment Revenue"
+            monthly_rev, x="order_month", y="payment_value",
+            markers=True, title=None,
+            color_discrete_sequence=["#10b981"]
         )
-
         fig.update_layout(
-            template="plotly_dark",
-            height=430,
-            xaxis_title="Month",
-            yaxis_title="Revenue (R$)",
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)"
+            template="plotly_dark", height=420,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            margin=dict(l=20, r=20, t=40, b=20),
+            xaxis_title="Month", yaxis_title="Revenue (R$)",
+            font=dict(family="Inter, sans-serif"),
+            title=dict(font=dict(size=16, color="#f8fafc"))
         )
+        fig.update_traces(line=dict(width=3), marker=dict(size=6))
+        
+        st.plotly_chart(fig, use_container_width=True)
 
-        st.plotly_chart(
-            fig,
-            use_container_width=True
+        # Category Revenue
+        st.markdown('<div style="margin-top: 2rem;">', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="section-header" style="margin-top:0;">
+            <div class="section-header-title"><span style="color:#10b981;">🏷️</span> Top Product Categories</div>
+            <div class="section-header-sub">Highest revenue-generating product segments</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        items_prod = orders_with_items.merge(products[["product_id", "product_category_name"]], on="product_id", how="left")
+        cat_rev = items_prod.groupby("product_category_name")["price"].sum().reset_index().sort_values("price", ascending=False).head(10)
+
+        fig2 = px.bar(
+            cat_rev, x="price", y="product_category_name", orientation="h",
+            text_auto=".2s", title=None,
+            color="price", color_continuous_scale="Teal"
         )
-
-
-        # ----------------------------------------------------
-        # Category revenue
-        # ----------------------------------------------------
-
-        st.markdown(
-            '<div class="section-title">'
-            '🏷️ Top Product Categories'
-            '</div>',
-            unsafe_allow_html=True
+        fig2.update_layout(
+            template="plotly_dark", height=450,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            margin=dict(l=20, r=20, t=30, b=20),
+            yaxis_title="", xaxis_title="Revenue (R$)",
+            font=dict(family="Inter, sans-serif"),
+            coloraxis_showscale=False
         )
+        st.plotly_chart(fig2, use_container_width=True)
 
-        items_prod = orders_with_items.merge(
-            products[
-                [
-                    "product_id",
-                    "product_category_name"
-                ]
-            ],
-            on="product_id",
-            how="left"
-        )
-
-        cat_rev = (
-            items_prod
-            .groupby("product_category_name")["price"]
-            .sum()
-            .reset_index()
-            .sort_values(
-                "price",
-                ascending=False
-            )
-            .head(10)
-        )
-
-        fig = px.bar(
-            cat_rev,
-            x="price",
-            y="product_category_name",
-            orientation="h",
-            text_auto=".2s",
-            title="Top 10 Categories by Product-Item Revenue"
-        )
-
-        fig.update_layout(
-            template="plotly_dark",
-            height=500,
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)",
-            yaxis_title="",
-            xaxis_title="Product Revenue (R$)"
-        )
-
-        st.plotly_chart(
-            fig,
-            use_container_width=True
-        )
-
-        # ----------------------------------------------------
-        # Business insight
-        # ----------------------------------------------------
-
+        # Insight
         if not cat_rev.empty:
-
-            top_category = cat_rev.iloc[0]["product_category_name"]
-            top_category_value = cat_rev.iloc[0]["price"]
-
+            top_cat = cat_rev.iloc[0]["product_category_name"]
+            top_val = cat_rev.iloc[0]["price"]
             st.markdown(f"""
-            <div class="insight insight-purple">
-
-                <div class="insight-title">
-                    ⭐ Category Leader
-                </div>
-
+            <div class="insight-box theme-revenue">
+                <div class="insight-title">⭐ Category Leader</div>
                 <div class="insight-text">
-                    <b>{top_category}</b> is the highest-performing
-                    category by product-item revenue in the selected
-                    dataset, generating approximately
-                    <b>R$ {top_category_value:,.2f}</b>.
+                    <b>{top_cat}</b> dominates the selected period, generating approximately <b>R$ {top_val:,.2f}</b> in product-item revenue. This indicates strong market demand in this segment.
                 </div>
-
             </div>
             """, unsafe_allow_html=True)
 
-
     # ========================================================
-    # TAB 2 — ORDERS
+    # TAB 2 — ORDERS (Blue Theme)
     # ========================================================
 
     with tab2:
-
-        st.markdown(
-            '<div class="section-title">'
-            '📦 Order Performance'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div class="section-subtitle">'
-            'Explore order volume, purchasing patterns and order status.'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        c1, c2 = st.columns(2)
-
-        # ----------------------------------------------------
-        # Monthly orders
-        # ----------------------------------------------------
-
-        with c1:
-
-            monthly_orders = (
-                filtered_orders
-                .groupby("order_month")["order_id"]
-                .nunique()
-                .reset_index()
-            )
-
-            fig = px.bar(
-                monthly_orders,
-                x="order_month",
-                y="order_id",
-                title="Monthly Order Volume",
-                text_auto=True
-            )
-
-            fig.update_layout(
-                template="plotly_dark",
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                xaxis_title="Month",
-                yaxis_title="Orders"
-            )
-
-            st.plotly_chart(
-                fig,
-                use_container_width=True
-            )
-
-        # ----------------------------------------------------
-        # Status
-        # ----------------------------------------------------
-
-        with c2:
-
-            status_counts = (
-                filtered_orders["order_status"]
-                .value_counts()
-                .reset_index()
-            )
-
-            status_counts.columns = [
-                "status",
-                "count"
-            ]
-
-            fig = px.pie(
-                status_counts,
-                values="count",
-                names="status",
-                hole=0.48,
-                title="Order Status Distribution"
-            )
-
-            fig.update_layout(
-                template="plotly_dark",
-                paper_bgcolor="rgba(0,0,0,0)"
-            )
-
-            st.plotly_chart(
-                fig,
-                use_container_width=True
-            )
-
-
-        # ----------------------------------------------------
-        # Order statistics
-        # ----------------------------------------------------
-
-        delivered_count = (
-            filtered_orders["order_status"]
-            == "delivered"
-        ).sum()
-
-        delivery_rate = (
-            delivered_count / total_orders * 100
-            if total_orders > 0
-            else 0
-        )
-
-        d1, d2, d3 = st.columns(3)
-
-        with d1:
-
-            st.markdown(f"""
-            <div class="highlight-box">
-
-                <div class="highlight-number">
-                    {delivery_rate:.2f}%
-                </div>
-
-                <div class="highlight-label">
-                    Orders delivered
-                </div>
-
-            </div>
-            """, unsafe_allow_html=True)
-
-        with d2:
-
-            st.markdown(f"""
-            <div class="highlight-box">
-
-                <div class="highlight-number">
-                    {total_orders:,}
-                </div>
-
-                <div class="highlight-label">
-                    Unique orders
-                </div>
-
-            </div>
-            """, unsafe_allow_html=True)
-
-        with d3:
-
-            st.markdown(f"""
-            <div class="highlight-box">
-
-                <div class="highlight-number">
-                    R$ {aov:,.2f}
-                </div>
-
-                <div class="highlight-label">
-                    Payment-based AOV
-                </div>
-
-            </div>
-            """, unsafe_allow_html=True)
-
-
-        st.markdown(f"""
-        <div class="insight insight-blue">
-
-            <div class="insight-title">
-                📌 Order Performance Insight
-            </div>
-
-            <div class="insight-text">
-                The selected period contains
-                <b>{total_orders:,}</b> unique orders.
-                Approximately <b>{delivery_rate:.2f}%</b>
-                of these orders are marked as delivered.
-            </div>
-
+        st.markdown("""
+        <div class="section-header">
+            <div class="section-header-title"><span style="color:#3b82f6;">📦</span> Order Performance</div>
+            <div class="section-header-sub">Analyze order volume, status distribution, and fulfillment metrics</div>
         </div>
         """, unsafe_allow_html=True)
 
+        c1, c2 = st.columns(2)
+
+        with c1:
+            monthly_orders = filtered_orders.groupby("order_month")["order_id"].nunique().reset_index()
+            fig = px.bar(
+                monthly_orders, x="order_month", y="order_id",
+                text_auto=True, title=None,
+                color_discrete_sequence=["#3b82f6"]
+            )
+            fig.update_layout(
+                template="plotly_dark", height=380,
+                paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                margin=dict(l=20, r=20, t=30, b=20),
+                xaxis_title="Month", yaxis_title="Orders",
+                font=dict(family="Inter, sans-serif")
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+        with c2:
+            status_counts = filtered_orders["order_status"].value_counts().reset_index()
+            status_counts.columns = ["status", "count"]
+            fig = px.pie(
+                status_counts, values="count", names="status", hole=0.55,
+                title=None, color_discrete_sequence=px.colors.sequential.Blues_r
+            )
+            fig.update_layout(
+                template="plotly_dark", height=380,
+                paper_bgcolor="rgba(0,0,0,0)",
+                margin=dict(l=20, r=20, t=30, b=20),
+                font=dict(family="Inter, sans-serif"),
+                showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.1)
+            )
+            fig.update_traces(textinfo="percent+label", pull=[0.02 if s == "delivered" else 0 for s in status_counts["status"]])
+            st.plotly_chart(fig, use_container_width=True)
+
+        # Stats Row
+        delivered_count = (filtered_orders["order_status"] == "delivered").sum()
+        delivery_rate = (delivered_count / total_orders * 100) if total_orders > 0 else 0
+
+        st.markdown(f"""
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="stat-number" style="color: #3b82f6;">{delivery_rate:.1f}%</div>
+                <div class="stat-label">Delivery Success Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #60a5fa;">{total_orders:,}</div>
+                <div class="stat-label">Unique Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #93c5fd;">R$ {aov:,.2f}</div>
+                <div class="stat-label">Average Order Value</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown(f"""
+        <div class="insight-box theme-orders">
+            <div class="insight-title">📌 Fulfillment Insight</div>
+            <div class="insight-text">
+                Out of <b>{total_orders:,}</b> orders in the selected period, <b>{delivered_count:,}</b> have been successfully delivered, achieving a fulfillment rate of <b>{delivery_rate:.2f}%</b>. Monitor non-delivered statuses for operational improvements.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # ========================================================
-    # TAB 3 — CUSTOMERS
+    # TAB 3 — CUSTOMERS (Violet Theme)
     # ========================================================
 
     with tab3:
+        st.markdown("""
+        <div class="section-header">
+            <div class="section-header-title"><span style="color:#8b5cf6;">👥</span> Customer Intelligence</div>
+            <div class="section-header-sub">Segmentation, retention patterns, and geographic distribution</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-        st.markdown(
-            '<div class="section-title">'
-            '👥 Customer Intelligence'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div class="section-subtitle">'
-            'Understand customer frequency, retention patterns '
-            'and geographic distribution.'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-
-        # ----------------------------------------------------
-        # Customer orders
-        # ----------------------------------------------------
-
-        orders_with_unique = filtered_orders.merge(
-            customers[
-                [
-                    "customer_id",
-                    "customer_unique_id"
-                ]
-            ],
-            on="customer_id",
-            how="left"
-        )
-
-        cust_orders = (
-            orders_with_unique
-            .groupby(
-                "customer_unique_id"
-            )["order_id"]
-            .nunique()
-            .reset_index()
-        )
-
-        cust_orders.columns = [
-            "customer_unique_id",
-            "order_count"
-        ]
-
-
-        # ----------------------------------------------------
-        # Segmentation
-        # ----------------------------------------------------
+        orders_with_unique = filtered_orders.merge(customers[["customer_id", "customer_unique_id"]], on="customer_id", how="left")
+        cust_orders = orders_with_unique.groupby("customer_unique_id")["order_id"].nunique().reset_index()
+        cust_orders.columns = ["customer_unique_id", "order_count"]
 
         def segment(count):
-
-            if count == 1:
-                return "Low Frequency"
-
-            elif count <= 5:
-                return "Medium Frequency"
-
+            if count == 1: return "Low Frequency"
+            elif count <= 5: return "Medium Frequency"
             return "High Frequency"
 
-
-        cust_orders["segment"] = (
-            cust_orders["order_count"]
-            .apply(segment)
-        )
-
-
-        seg_counts = (
-            cust_orders["segment"]
-            .value_counts()
-            .reset_index()
-        )
-
-        seg_counts.columns = [
-            "segment",
-            "count"
-        ]
-
+        cust_orders["segment"] = cust_orders["order_count"].apply(segment)
+        seg_counts = cust_orders["segment"].value_counts().reset_index()
+        seg_counts.columns = ["segment", "count"]
 
         c1, c2 = st.columns(2)
 
-
-        # ----------------------------------------------------
-        # Segmentation chart
-        # ----------------------------------------------------
-
         with c1:
-
             fig = px.pie(
-                seg_counts,
-                values="count",
-                names="segment",
-                hole=0.48,
-                title="Customer Purchase Frequency"
+                seg_counts, values="count", names="segment", hole=0.55,
+                title=None, color_discrete_sequence=["#8b5cf6", "#a78bfa", "#c4b5fd"]
             )
-
             fig.update_layout(
-                template="plotly_dark",
-                paper_bgcolor="rgba(0,0,0,0)"
+                template="plotly_dark", height=380,
+                paper_bgcolor="rgba(0,0,0,0)",
+                margin=dict(l=20, r=20, t=30, b=20),
+                font=dict(family="Inter, sans-serif"),
+                showlegend=True, legend=dict(orientation="h", yanchor="bottom", y=-0.1)
             )
-
-            st.plotly_chart(
-                fig,
-                use_container_width=True
-            )
-
-
-        # ----------------------------------------------------
-        # State customers
-        # ----------------------------------------------------
+            fig.update_traces(textinfo="percent+label")
+            st.plotly_chart(fig, use_container_width=True)
 
         with c2:
-
-            state_cust = (
-                orders_full
-                .groupby("customer_state")
-                ["customer_unique_id"]
-                .nunique()
-                .reset_index()
-                .sort_values(
-                    "customer_unique_id",
-                    ascending=False
-                )
-                .head(10)
-            )
-
+            state_cust = orders_full.groupby("customer_state")["customer_unique_id"].nunique().reset_index().sort_values("customer_unique_id", ascending=False).head(10)
             fig = px.bar(
-                state_cust,
-                x="customer_state",
-                y="customer_unique_id",
-                text_auto=True,
-                title="Top 10 States by Unique Customers"
+                state_cust, x="customer_state", y="customer_unique_id",
+                text_auto=True, title=None,
+                color="customer_unique_id", color_continuous_scale="Purples"
             )
-
             fig.update_layout(
-                template="plotly_dark",
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                xaxis_title="State",
-                yaxis_title="Unique Customers"
+                template="plotly_dark", height=380,
+                paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                margin=dict(l=20, r=20, t=30, b=20),
+                xaxis_title="State", yaxis_title="Unique Customers",
+                font=dict(family="Inter, sans-serif"),
+                coloraxis_showscale=False
             )
+            st.plotly_chart(fig, use_container_width=True)
 
-            st.plotly_chart(
-                fig,
-                use_container_width=True
-            )
+        # Retention Stats
+        repeat_customers = cust_orders[cust_orders["order_count"] > 1]["customer_unique_id"].nunique()
+        customer_count = cust_orders["customer_unique_id"].nunique()
+        repeat_rate = (repeat_customers / customer_count * 100) if customer_count > 0 else 0
 
-
-        # ----------------------------------------------------
-        # Customer frequency KPIs
-        # ----------------------------------------------------
-
-        repeat_customers = (
-            cust_orders[
-                cust_orders["order_count"] > 1
-            ]
-            ["customer_unique_id"]
-            .nunique()
-        )
-
-        customer_count = (
-            cust_orders["customer_unique_id"]
-            .nunique()
-        )
-
-        repeat_rate = (
-            repeat_customers / customer_count * 100
-            if customer_count > 0
-            else 0
-        )
-
-
-        r1, r2, r3 = st.columns(3)
-
-
-        with r1:
-
-            st.markdown(f"""
-            <div class="highlight-box">
-
-                <div class="highlight-number">
-                    {customer_count:,}
-                </div>
-
-                <div class="highlight-label">
-                    Unique customers
-                </div>
-
+        st.markdown(f"""
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="stat-number" style="color: #8b5cf6;">{customer_count:,}</div>
+                <div class="stat-label">Total Unique Customers</div>
             </div>
-            """, unsafe_allow_html=True)
-
-
-        with r2:
-
-            st.markdown(f"""
-            <div class="highlight-box">
-
-                <div class="highlight-number">
-                    {repeat_customers:,}
-                </div>
-
-                <div class="highlight-label">
-                    Repeat customers
-                </div>
-
+            <div class="stat-card">
+                <div class="stat-number" style="color: #a78bfa;">{repeat_customers:,}</div>
+                <div class="stat-label">Repeat Customers</div>
             </div>
-            """, unsafe_allow_html=True)
-
-
-        with r3:
-
-            st.markdown(f"""
-            <div class="highlight-box">
-
-                <div class="highlight-number">
-                    {repeat_rate:.2f}%
-                </div>
-
-                <div class="highlight-label">
-                    Repeat customer rate
-                </div>
-
+            <div class="stat-card">
+                <div class="stat-number" style="color: #c4b5fd;">{repeat_rate:.1f}%</div>
+                <div class="stat-label">Repeat Purchase Rate</div>
             </div>
-            """, unsafe_allow_html=True)
-
-
-        st.markdown("""
-        <div class="insight insight-green">
-
-            <div class="insight-title">
-                🎯 Customer Retention Opportunity
-            </div>
-
-            <div class="insight-text">
-                Customer frequency analysis separates one-time
-                purchasers from medium- and high-frequency customers.
-                This provides a clear foundation for retention,
-                loyalty and re-engagement strategies.
-            </div>
-
         </div>
         """, unsafe_allow_html=True)
 
+        st.markdown("""
+        <div class="insight-box theme-customers">
+            <div class="insight-title">🎯 Retention Opportunity</div>
+            <div class="insight-text">
+                Customer frequency segmentation reveals distinct behavioral clusters. High-frequency customers represent the most valuable segment for loyalty programs, while low-frequency segments present the largest re-engagement opportunity.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # ========================================================
-    # TAB 4 — RECOMMENDATIONS
+    # TAB 4 — RECOMMENDATIONS (Orange Theme)
     # ========================================================
 
     with tab4:
+        st.markdown("""
+        <div class="section-header">
+            <div class="section-header-title"><span style="color:#f59e0b;">🤖</span> Recommendation Insights</div>
+            <div class="section-header-sub">Cross-selling patterns and category association analysis</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-        st.markdown(
-            '<div class="section-title">'
-            '🤖 Product Recommendation Insights'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div class="section-subtitle">'
-            'Discover category combinations and cross-selling opportunities.'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-
-        # ----------------------------------------------------
-        # Product pairs
-        # ----------------------------------------------------
-
-        order_products = order_items.merge(
-            products[
-                [
-                    "product_id",
-                    "product_category_name"
-                ]
-            ],
-            on="product_id",
-            how="left"
-        )[
-            [
-                "order_id",
-                "product_id",
-                "product_category_name"
-            ]
-        ]
-
+        order_products = order_items.merge(products[["product_id", "product_category_name"]], on="product_id", how="left")[["order_id", "product_id", "product_category_name"]]
 
         @st.cache_data
         def get_product_pairs(data):
-
             pairs = []
-
-            for order_id, group in data.groupby(
-                "order_id"
-            ):
-
-                categories = (
-                    group[
-                        "product_category_name"
-                    ]
-                    .dropna()
-                    .unique()
-                )
-
+            for order_id, group in data.groupby("order_id"):
+                categories = group["product_category_name"].dropna().unique()
                 if len(categories) > 1:
-
                     for i, cat1 in enumerate(categories):
-
-                        for cat2 in categories[i + 1:]:
-
+                        for cat2 in categories[i+1:]:
                             if cat1 != cat2:
-
-                                pairs.append(
-                                    (
-                                        cat1,
-                                        cat2
-                                    )
-                                )
-
+                                pairs.append((cat1, cat2))
             if not pairs:
-                return pd.DataFrame(
-                    columns=[
-                        "category_1",
-                        "category_2",
-                        "frequency"
-                    ]
-                )
+                return pd.DataFrame(columns=["category_1", "category_2", "frequency"])
+            pairs_df = pd.DataFrame(pairs, columns=["category_1", "category_2"])
+            return pairs_df.groupby(["category_1", "category_2"]).size().reset_index(name="frequency").sort_values("frequency", ascending=False).head(15)
 
-            pairs_df = pd.DataFrame(
-                pairs,
-                columns=[
-                    "category_1",
-                    "category_2"
-                ]
-            )
-
-            pair_counts = (
-                pairs_df
-                .groupby(
-                    [
-                        "category_1",
-                        "category_2"
-                    ]
-                )
-                .size()
-                .reset_index(
-                    name="frequency"
-                )
-                .sort_values(
-                    "frequency",
-                    ascending=False
-                )
-                .head(15)
-            )
-
-            return pair_counts
-
-
-        pair_counts = get_product_pairs(
-            order_products
-        )
-
+        pair_counts = get_product_pairs(order_products)
 
         if not pair_counts.empty:
-
-            pair_counts["pair"] = (
-                pair_counts["category_1"]
-                + " + "
-                + pair_counts["category_2"]
-            )
-
+            pair_counts["pair"] = pair_counts["category_1"] + " + " + pair_counts["category_2"]
+            
             fig = px.bar(
-                pair_counts.head(10),
-                x="frequency",
-                y="pair",
-                orientation="h",
-                text_auto=True,
-                title="Top Category Combinations Bought Together"
+                pair_counts.head(10), x="frequency", y="pair", orientation="h",
+                text_auto=True, title=None,
+                color="frequency", color_continuous_scale="YlOrBr"
             )
-
             fig.update_layout(
-                template="plotly_dark",
-                height=500,
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                xaxis_title="Co-purchase Frequency",
-                yaxis_title=""
+                template="plotly_dark", height=450,
+                paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                margin=dict(l=20, r=20, t=30, b=20),
+                xaxis_title="Co-purchase Frequency", yaxis_title="",
+                font=dict(family="Inter, sans-serif"),
+                coloraxis_showscale=False
             )
+            st.plotly_chart(fig, use_container_width=True)
 
-            st.plotly_chart(
-                fig,
-                use_container_width=True
-            )
-
-        else:
-
-            st.info(
-                "Not enough multi-category orders for this analysis."
-            )
-
-
-        # ----------------------------------------------------
-        # Cross-category
-        # ----------------------------------------------------
-
-        st.markdown(
-            '<div class="section-title">'
-            '🛒 Cross-Category Buying Patterns'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-
-        cross_sell = order_items.merge(
-            products[
-                [
-                    "product_id",
-                    "product_category_name"
-                ]
-            ],
-            on="product_id",
-            how="left"
-        )
-
-
-        category_orders = (
-            cross_sell
-            .groupby(
-                "product_category_name"
-            )["order_id"]
-            .nunique()
-            .reset_index()
-        )
-
-        category_orders.columns = [
-            "category",
-            "order_count"
-        ]
-
-        category_orders = (
-            category_orders
-            .sort_values(
-                "order_count",
-                ascending=False
-            )
-            .head(10)
-        )
-
-
-        fig = px.bar(
-            category_orders,
-            x="order_count",
-            y="category",
-            orientation="h",
-            text_auto=True,
-            title="Categories with Highest Order Presence"
-        )
-
-        fig.update_layout(
-            template="plotly_dark",
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)"
-        )
-
-        st.plotly_chart(
-            fig,
-            use_container_width=True
-        )
-
-
-        # ----------------------------------------------------
-        # Recommendation demo
-        # ----------------------------------------------------
-
-        st.markdown(
-            '<div class="section-title">'
-            '💡 Recommendation Explorer'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-
-        top_categories = (
-            products[
-                "product_category_name"
-            ]
-            .dropna()
-            .value_counts()
-            .head(20)
-            .index
-            .tolist()
-        )
-
-
-        if top_categories:
-
-            selected_category = st.selectbox(
-                "Choose a category",
-                top_categories
-            )
-
-
-            if not pair_counts.empty:
-
-                related_pairs = pair_counts[
-                    (
-                        pair_counts["category_1"]
-                        == selected_category
-                    )
-                    |
-                    (
-                        pair_counts["category_2"]
-                        == selected_category
-                    )
-                ].head(5)
-
-
-                if not related_pairs.empty:
-
-                    for _, row in related_pairs.iterrows():
-
-                        if (
-                            row["category_1"]
-                            == selected_category
-                        ):
-
-                            recommended = row[
-                                "category_2"
-                            ]
-
-                        else:
-
-                            recommended = row[
-                                "category_1"
-                            ]
-
-
-                        st.markdown(f"""
-                        <div class="insight insight-orange">
-
-                            <div class="insight-title">
-                                🛍️ Customers who bought
-                                {selected_category}
-                            </div>
-
-                            <div class="insight-text">
-                                Consider recommending
-                                <b>{recommended}</b>
-                                based on observed
-                                co-purchase behaviour.
-                            </div>
-
-                        </div>
-                        """, unsafe_allow_html=True)
-
-                else:
-
-                    st.info(
-                        "No strong category association found."
-                    )
-
-
+        # Cross-category presence
         st.markdown("""
-        <div class="insight insight-purple">
-
-            <div class="insight-title">
-                🚀 Business Application
-            </div>
-
-            <div class="insight-text">
-                These patterns can support product bundling,
-                cross-selling, recommendation systems and
-                targeted marketing campaigns.
-            </div>
-
+        <div class="section-header" style="margin-top:1rem;">
+            <div class="section-header-title"><span style="color:#f59e0b;">🛒</span> Category Order Presence</div>
+            <div class="section-header-sub">Most frequently appearing categories across orders</div>
         </div>
         """, unsafe_allow_html=True)
 
+        cross_sell = order_items.merge(products[["product_id", "product_category_name"]], on="product_id", how="left")
+        category_orders = cross_sell.groupby("product_category_name")["order_id"].nunique().reset_index()
+        category_orders.columns = ["category", "order_count"]
+        category_orders = category_orders.sort_values("order_count", ascending=False).head(10)
+
+        fig = px.bar(
+            category_orders, x="order_count", y="category", orientation="h",
+            text_auto=True, title=None,
+            color="order_count", color_continuous_scale="Oranges"
+        )
+        fig.update_layout(
+            template="plotly_dark", height=420,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            margin=dict(l=20, r=20, t=30, b=20),
+            yaxis_title="", xaxis_title="Order Presence",
+            font=dict(family="Inter, sans-serif"),
+            coloraxis_showscale=False
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+        # Interactive Explorer
+        st.markdown("""
+        <div class="section-header" style="margin-top:1rem;">
+            <div class="section-header-title"><span style="color:#f59e0b;">💡</span> Association Explorer</div>
+            <div class="section-header-sub">Select a category to discover cross-selling opportunities</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        top_categories = products["product_category_name"].dropna().value_counts().head(20).index.tolist()
+        
+        if top_categories:
+            selected_category = st.selectbox("Choose a category", top_categories, key="rec_select")
+            
+            if not pair_counts.empty:
+                related_pairs = pair_counts[(pair_counts["category_1"] == selected_category) | (pair_counts["category_2"] == selected_category)].head(5)
+                
+                if not related_pairs.empty:
+                    rec_cols = st.columns(min(len(related_pairs), 3))
+                    for idx, (_, row) in enumerate(related_pairs.iterrows()):
+                        recommended = row["category_2"] if row["category_1"] == selected_category else row["category_1"]
+                        with rec_cols[idx % 3]:
+                            st.markdown(f"""
+                            <div style="background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(217,119,6,0.05)); 
+                                        border: 1px solid rgba(245,158,11,0.25); border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🛍️</div>
+                                <div style="color: #fbbf24; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.25rem;">RECOMMENDATION</div>
+                                <div style="color: #f8fafc; font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem;">{recommended}</div>
+                                <div style="color: #cbd5e1; font-size: 0.8rem;">Co-purchased <b>{row["frequency"]}</b> times</div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                else:
+                    st.info("No strong associations found for this category.")
+
+        st.markdown("""
+        <div class="insight-box theme-recs">
+            <div class="insight-title">🚀 Business Application</div>
+            <div class="insight-text">
+                These co-purchase patterns enable data-driven product bundling, personalized recommendation engines, and targeted marketing campaigns to increase basket size and customer lifetime value.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # ========================================================
-    # TAB 5 — SQL SHOWCASE
+    # TAB 5 — SQL SHOWCASE (Indigo Theme — NO RAW CODE BLOCKS)
     # ========================================================
 
     with tab5:
-
-        st.markdown(
-            '<div class="section-title">'
-            '🧠 SQL Analytics Showcase'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div class="section-subtitle">'
-            'Selected SQL logic used to validate and calculate '
-            'the business metrics presented in this dashboard.'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-
-        # ----------------------------------------------------
-        # Revenue
-        # ----------------------------------------------------
-
-        st.subheader("💰 Revenue Analysis")
-
-
-        with st.expander(
-            "KPI 1 — Total Payment Revenue"
-        ):
-
-            st.code("""
-SELECT
-    ROUND(SUM(payment_value), 2) AS total_revenue
-FROM payments;
-            """, language="sql")
-
-
-        with st.expander(
-            "KPI 2 — Monthly Revenue"
-        ):
-
-            st.code("""
-SELECT
-    DATE_FORMAT(
-        o.order_purchase_timestamp,
-        '%Y-%m'
-    ) AS revenue_month,
-    ROUND(
-        SUM(p.payment_value),
-        2
-    ) AS monthly_revenue
-FROM orders o
-JOIN payments p
-    ON p.order_id = o.order_id
-GROUP BY revenue_month
-ORDER BY revenue_month;
-            """, language="sql")
-
-
-        with st.expander(
-            "KPI 3 — Product Category Revenue"
-        ):
-
-            st.code("""
-SELECT
-    pr.product_category_name,
-    ROUND(
-        SUM(oi.price),
-        2
-    ) AS category_revenue
-FROM products pr
-JOIN order_items oi
-    ON oi.product_id = pr.product_id
-GROUP BY pr.product_category_name
-ORDER BY category_revenue DESC
-LIMIT 10;
-            """, language="sql")
-
-
-        with st.expander(
-            "KPI 4 — State Revenue Contribution"
-        ):
-
-            st.code("""
-SELECT
-    c.customer_state,
-    ROUND(
-        SUM(p.payment_value),
-        2
-    ) AS state_revenue
-FROM orders o
-JOIN customers c
-    ON c.customer_id = o.customer_id
-JOIN payments p
-    ON p.order_id = o.order_id
-GROUP BY c.customer_state
-ORDER BY state_revenue DESC;
-            """, language="sql")
-
-
-        # ----------------------------------------------------
-        # Orders
-        # ----------------------------------------------------
-
-        st.subheader("📦 Order Analysis")
-
-
-        with st.expander(
-            "KPI 5 — Total Orders"
-        ):
-
-            st.code("""
-SELECT
-    COUNT(DISTINCT order_id)
-    AS total_orders
-FROM orders;
-            """, language="sql")
-
-
-        with st.expander(
-            "KPI 6 — Monthly Order Trend"
-        ):
-
-            st.code("""
-SELECT
-    DATE_FORMAT(
-        order_purchase_timestamp,
-        '%Y-%m'
-    ) AS order_month,
-    COUNT(DISTINCT order_id)
-    AS total_orders
-FROM orders
-GROUP BY order_month
-ORDER BY order_month;
-            """, language="sql")
-
-
-        with st.expander(
-            "KPI 7 — Order Status Distribution"
-        ):
-
-            st.code("""
-SELECT
-    order_status,
-    COUNT(*) AS total_orders
-FROM orders
-GROUP BY order_status
-ORDER BY total_orders DESC;
-            """, language="sql")
-
-
-        # ----------------------------------------------------
-        # Customers
-        # ----------------------------------------------------
-
-        st.subheader("👥 Customer Analysis")
-
-
-        with st.expander(
-            "KPI 8 — Unique Customers"
-        ):
-
-            st.code("""
-SELECT
-    COUNT(DISTINCT c.customer_unique_id)
-    AS unique_customers
-FROM orders o
-JOIN customers c
-    ON c.customer_id = o.customer_id;
-            """, language="sql")
-
-
-        with st.expander(
-            "KPI 9 — Repeat Customer Rate"
-        ):
-
-            st.code("""
-SELECT
-    ROUND(
-        100.0 *
-        SUM(
-            CASE
-                WHEN purchase_count > 1
-                THEN 1
-                ELSE 0
-            END
-        ) / COUNT(*),
-        2
-    ) AS repeat_customer_rate
-FROM (
-    SELECT
-        c.customer_unique_id,
-        COUNT(DISTINCT o.order_id)
-        AS purchase_count
-    FROM orders o
-    JOIN customers c
-        ON c.customer_id = o.customer_id
-    GROUP BY c.customer_unique_id
-) t;
-            """, language="sql")
-
-
-        with st.expander(
-            "KPI 10 — Customer Segmentation"
-        ):
-
-            st.code("""
-SELECT
-    CASE
-        WHEN total_orders = 1
-            THEN 'Low Frequency'
-
-        WHEN total_orders BETWEEN 2 AND 5
-            THEN 'Medium Frequency'
-
-        ELSE 'High Frequency'
-    END AS customer_segment,
-
-    COUNT(*) AS total_customers
-
-FROM (
-    SELECT
-        c.customer_unique_id,
-        COUNT(DISTINCT o.order_id)
-        AS total_orders
-
-    FROM orders o
-
-    JOIN customers c
-        ON o.customer_id = c.customer_id
-
-    GROUP BY c.customer_unique_id
-) t
-
-GROUP BY customer_segment;
-            """, language="sql")
-
-
-        with st.expander(
-            "KPI 11 — Top Customers by Lifetime Revenue"
-        ):
-
-            st.code("""
-SELECT
-    c.customer_unique_id,
-
-    ROUND(
-        SUM(p.payment_value),
-        2
-    ) AS customer_lifetime_revenue
-
-FROM orders o
-
-JOIN customers c
-    ON o.customer_id = c.customer_id
-
-JOIN payments p
-    ON p.order_id = o.order_id
-
-GROUP BY c.customer_unique_id
-
-ORDER BY customer_lifetime_revenue DESC
-
-LIMIT 10;
-            """, language="sql")
-
-
-        # ----------------------------------------------------
-        # DATASET METRICS
-        # ----------------------------------------------------
-
-        st.subheader("📊 Dataset Validation Metrics")
-
-
-        v1, v2, v3 = st.columns(3)
-
-
-        with v1:
-
-            st.markdown(f"""
-            <div class="metric-card">
-
-                <div class="metric-label">
-                    🛍️ Unique Products
-                </div>
-
-                <div class="metric-value">
-                    {products["product_id"].nunique():,}
-                </div>
-
-                <div class="metric-description">
-                    Distinct product IDs
-                </div>
-
-            </div>
-            """, unsafe_allow_html=True)
-
-
-        with v2:
-
-            st.markdown(f"""
-            <div class="metric-card">
-
-                <div class="metric-label">
-                    🏷️ Product Categories
-                </div>
-
-                <div class="metric-value">
-                    {products["product_category_name"].nunique():,}
-                </div>
-
-                <div class="metric-description">
-                    Distinct category values
-                </div>
-
-            </div>
-            """, unsafe_allow_html=True)
-
-
-        with v3:
-
-            st.markdown(f"""
-            <div class="metric-card">
-
-                <div class="metric-label">
-                    👥 Unique Customers
-                </div>
-
-                <div class="metric-value">
-                    {customers["customer_unique_id"].nunique():,}
-                </div>
-
-                <div class="metric-description">
-                    customer_unique_id
-                </div>
-
-            </div>
-            """, unsafe_allow_html=True)
-
-
         st.markdown("""
-        <div class="insight insight-blue">
-
-            <div class="insight-title">
-                🔎 Why these metrics matter
-            </div>
-
-            <div class="insight-text">
-                The dashboard distinguishes between orders,
-                customer records, actual unique customers,
-                product IDs and product categories. This prevents
-                different business entities from being incorrectly
-                treated as the same metric.
-            </div>
-
+        <div class="section-header">
+            <div class="section-header-title"><span style="color:#6366f1;">🧠</span> SQL Analytics Engine</div>
+            <div class="section-header-sub">Query logic powering every metric in this dashboard</div>
         </div>
         """, unsafe_allow_html=True)
 
+        st.markdown("""
+        <div class="insight-box theme-sql" style="margin-bottom: 2rem;">
+            <div class="insight-title">🔎 From SQL to Business Insights</div>
+            <div class="insight-text">
+                Every visualization in this dashboard is validated by structured SQL queries against the Olist relational schema. Below are the core queries that calculate the business metrics you see above.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        queries = [
+            ("💰 Total Payment Revenue", 
+             "SELECT\n    ROUND(SUM(payment_value), 2) AS total_revenue\nFROM payments;"),
+            ("📅 Monthly Revenue Trend",
+             "SELECT\n    DATE_FORMAT(o.order_purchase_timestamp, '%Y-%m') AS revenue_month,\n    ROUND(SUM(p.payment_value), 2) AS monthly_revenue\nFROM orders o\nJOIN payments p ON p.order_id = o.order_id\nGROUP BY revenue_month\nORDER BY revenue_month;"),
+            ("🏷️ Top Category Revenue",
+             "SELECT\n    pr.product_category_name,\n    ROUND(SUM(oi.price), 2) AS category_revenue\nFROM products pr\nJOIN order_items oi ON oi.product_id = pr.product_id\nGROUP BY pr.product_category_name\nORDER BY category_revenue DESC\nLIMIT 10;"),
+            ("🗺️ State Revenue Contribution",
+             "SELECT\n    c.customer_state,\n    ROUND(SUM(p.payment_value), 2) AS state_revenue\nFROM orders o\nJOIN customers c ON c.customer_id = o.customer_id\nJOIN payments p ON p.order_id = o.order_id\nGROUP BY c.customer_state\nORDER BY state_revenue DESC;"),
+            ("📦 Total Order Volume",
+             "SELECT\n    COUNT(DISTINCT order_id) AS total_orders\nFROM orders;"),
+            ("📊 Monthly Order Trend",
+             "SELECT\n    DATE_FORMAT(order_purchase_timestamp, '%Y-%m') AS order_month,\n    COUNT(DISTINCT order_id) AS total_orders\nFROM orders\nGROUP BY order_month\nORDER BY order_month;"),
+            ("✅ Order Status Breakdown",
+             "SELECT\n    order_status,\n    COUNT(*) AS total_orders\nFROM orders\nGROUP BY order_status\nORDER BY total_orders DESC;"),
+            ("👥 Unique Customer Count",
+             "SELECT\n    COUNT(DISTINCT c.customer_unique_id) AS unique_customers\nFROM orders o\nJOIN customers c ON c.customer_id = o.customer_id;"),
+            ("🔄 Repeat Customer Rate",
+             "SELECT\n    ROUND(100.0 * SUM(CASE WHEN purchase_count > 1 THEN 1 ELSE 0 END) / COUNT(*), 2) AS repeat_customer_rate\nFROM (\n    SELECT c.customer_unique_id, COUNT(DISTINCT o.order_id) AS purchase_count\n    FROM orders o\n    JOIN customers c ON c.customer_id = o.customer_id\n    GROUP BY c.customer_unique_id\n) t;"),
+            ("🎯 Customer Segmentation",
+             "SELECT\n    CASE\n        WHEN total_orders = 1 THEN 'Low Frequency'\n        WHEN total_orders BETWEEN 2 AND 5 THEN 'Medium Frequency'\n        ELSE 'High Frequency'\n    END AS customer_segment,\n    COUNT(*) AS total_customers\nFROM (\n    SELECT c.customer_unique_id, COUNT(DISTINCT o.order_id) AS total_orders\n    FROM orders o\n    JOIN customers c ON o.customer_id = c.customer_id\n    GROUP BY c.customer_unique_id\n) t\nGROUP BY customer_segment;"),
+            ("🏆 Top Customers by Lifetime Value",
+             "SELECT\n    c.customer_unique_id,\n    ROUND(SUM(p.payment_value), 2) AS customer_lifetime_revenue\nFROM orders o\nJOIN customers c ON o.customer_id = c.customer_id\nJOIN payments p ON p.order_id = o.order_id\nGROUP BY c.customer_unique_id\nORDER BY customer_lifetime_revenue DESC\nLIMIT 10;")
+        ]
+
+        # Display queries in a clean, styled grid
+        for i in range(0, len(queries), 2):
+            cols = st.columns(2)
+            for j in range(2):
+                if i + j < len(queries):
+                    title, sql = queries[i + j]
+                    with cols[j]:
+                        st.markdown(f"""
+                        <div class="query-card">
+                            <div class="query-header">📋 {title}</div>
+                            <div class="query-sql">{sql}</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+        # Dataset Validation Metrics
+        st.markdown("""
+        <div class="section-header" style="margin-top:2rem;">
+            <div class="section-header-title"><span style="color:#6366f1;">📊</span> Dataset Validation</div>
+            <div class="section-header-sub">Core entity counts across the entire dataset</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        v1, v2, v3 = st.columns(3)
+        with v1:
+            st.markdown(f"""
+            <div class="content-card" style="text-align: center;">
+                <div style="font-size: 2rem; font-weight: 800; color: #818cf8; margin-bottom: 0.5rem;">{products["product_id"].nunique():,}</div>
+                <div style="color: #94a3b8; font-weight: 600; font-size: 0.9rem;">Unique Products</div>
+            </div>
+            """, unsafe_allow_html=True)
+        with v2:
+            st.markdown(f"""
+            <div class="content-card" style="text-align: center;">
+                <div style="font-size: 2rem; font-weight: 800; color: #818cf8; margin-bottom: 0.5rem;">{products["product_category_name"].nunique():,}</div>
+                <div style="color: #94a3b8; font-weight: 600; font-size: 0.9rem;">Product Categories</div>
+            </div>
+            """, unsafe_allow_html=True)
+        with v3:
+            st.markdown(f"""
+            <div class="content-card" style="text-align: center;">
+                <div style="font-size: 2rem; font-weight: 800; color: #818cf8; margin-bottom: 0.5rem;">{customers["customer_unique_id"].nunique():,}</div>
+                <div style="color: #94a3b8; font-weight: 600; font-size: 0.9rem;">Unique Customers</div>
+            </div>
+            """, unsafe_allow_html=True)
 
     # ========================================================
     # FOOTER
     # ========================================================
 
     st.markdown("""
-    <div class="footer">
-
-        <div>
-            <b>Olist Business Analytics Suite</b>
-        </div>
-
-        <div>
-            Built by Varshini A S
-            · SQL · Python · Streamlit · Plotly
-        </div>
-
-        <div>
-            Business Intelligence & Data Analytics Portfolio Project
-        </div>
-
+    <div class="dashboard-footer">
+        <div style="font-weight: 700; color: #94a3b8; margin-bottom: 0.5rem;">Olist Business Analytics Suite</div>
+        <div>Built with SQL · Python · Streamlit · Plotly</div>
+        <div style="margin-top: 0.5rem; font-size: 0.75rem;">Business Intelligence & Data Analytics Portfolio Project</div>
     </div>
     """, unsafe_allow_html=True)
 
-
 else:
-
-    st.info(
-        "Upload the Olist dataset files into "
-        "01_dataset/00_raw_data/ to start the dashboard."
-    )
+    st.info("Upload the Olist dataset files into `01_dataset/00_raw_data/` to launch the dashboard.")
