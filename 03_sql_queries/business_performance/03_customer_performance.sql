@@ -86,7 +86,7 @@ GROUP BY acquisition_month
 ORDER BY acquisition_month;
 
 -- =====================================================
--- KPI 5 : CUSTOMER AVERAGE ORDER VALUE (AOV)
+-- KPI 5 : Which customers have the highest average order value (AOV)
 -- =====================================================
 
 SELECT
