@@ -330,6 +330,22 @@ st.markdown("""
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 
+    /* ---------- SIDEBAR COMPACT FIXES ---------- */
+    [data-testid="stSidebar"] .block-container {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+        gap: 0.3rem !important;
+    }
+    [data-testid="stSidebar"] .stDateInput,
+    [data-testid="stSidebar"] .stSelectbox {
+        margin-bottom: -0.5rem !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
+        margin-bottom: 0.2rem !important;
+    }
+
     /* Responsive */
     @media (max-width: 1200px) {
         .kpi-grid { grid-template-columns: repeat(3, 1fr); }
@@ -948,15 +964,29 @@ if data_loaded:
             """, unsafe_allow_html=True)
 
     # ========================================================
-    # FOOTER — AUTHOR INFO
+    # FOOTER — AUTHOR INFO (Redesigned)
     # ========================================================
 
     st.markdown("""
     <div class="dashboard-footer">
-        <div class="author">Author: Varshini A S</div>
-        <div class="tagline">🚀 Open for Internship and Freelancing Opportunities</div>
-        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">
-            Built with SQL · Python · Streamlit · Plotly
+        <div style="display: flex; justify-content: center; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+            <span style="font-size: 1.3rem;">👩‍💻</span>
+            <span class="author">Varshini A S</span>
+        </div>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
+            <span style="background: rgba(16, 185, 129, 0.12); color: #34d399; padding: 0.25rem 0.7rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(16, 185, 129, 0.2);">🌟 GSSoC Contributor</span>
+            <span style="background: rgba(245, 158, 11, 0.12); color: #fbbf24; padding: 0.25rem 0.7rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(245, 158, 11, 0.2);">💼 Open for Internships</span>
+            <span style="background: rgba(99, 102, 241, 0.12); color: #818cf8; padding: 0.25rem 0.7rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(99, 102, 241, 0.2);">🚀 Available for Freelancing</span>
+        </div>
+        <div style="color: #64748b; font-size: 0.8rem; margin-bottom: 0.8rem;">
+            Data Analytics · SQL · Python · Streamlit · Business Intelligence
+        </div>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+            <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">LinkedIn</a>
+            <span style="color: #334155;">·</span>
+            <a href="https://github.com/YOUR_GITHUB" target="_blank" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">GitHub</a>
+            <span style="color: #334155;">·</span>
+            <a href="mailto:YOUR_EMAIL@gmail.com" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">Email</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
