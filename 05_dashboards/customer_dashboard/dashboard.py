@@ -35,7 +35,13 @@ st.markdown("""
     .block-container {
         padding-top: 0.5rem !important;
         padding-bottom: 2rem;
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
         max-width: 1400px;
+    }
+    /* Tighten main content against sidebar */
+    [data-testid="stAppViewContainer"] .st-emotion-cache-1jicfl2 {
+        padding-left: 0.2rem !important;
     }
 
     /* Remove default streamlit padding */
@@ -982,11 +988,11 @@ if data_loaded:
             Data Analytics · SQL · Python · Streamlit · Business Intelligence
         </div>
         <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">LinkedIn</a>
+            <a href="https://linkedin.com/in/varshini-as" target="_blank" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">LinkedIn</a>
             <span style="color: #334155;">·</span>
-            <a href="https://github.com/YOUR_GITHUB" target="_blank" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">GitHub</a>
+            <a href="https://github.com/asvarshini" target="_blank" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">GitHub</a>
             <span style="color: #334155;">·</span>
-            <a href="mailto:YOUR_EMAIL@gmail.com" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">Email</a>
+            <a href="https://asvarshini.github.io" target="_blank" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">Portfolio</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
